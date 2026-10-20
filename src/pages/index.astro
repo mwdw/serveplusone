@@ -92,6 +92,27 @@ const listSchema = {
       mark.animate(frames, { duration: 520, easing: 'linear' });
     }
 
+    // Masonry that reads across: deal each card (newest first) to the shortest column.
+    const grid = document.querySelector<HTMLElement>('.grid');
+    let cols: HTMLElement[] = [];
+    function deal() {
+      if (!grid) return;
+      const n = Math.max(1, parseInt(getComputedStyle(grid).getPropertyValue('--cols')) || 1);
+      if (cols.length !== n) {
+        cols.forEach((c) => c.remove());
+        cols = Array.from({ length: n }, () => Object.assign(document.createElement('div'), { className: 'col' }));
+        grid.append(...cols);
+        grid.classList.add('is-dealt');
+      }
+      const h = cols.map(() => 0);
+      for (const e of entries) {
+        if (e.hidden) { cols[0].append(e); continue; }
+        const i = h.indexOf(Math.min(...h));
+        cols[i].append(e);
+        h[i] += e.offsetHeight + 22;
+      }
+    }
+
     // Cards slide to their new places instead of jumping (FLIP).
     function show(keep: (e: HTMLElement) => boolean, animate = true) {
       const before = new Map(entries.filter((e) => !e.hidden).map((e) => [e, e.getBoundingClientRect()]));
@@ -100,6 +121,7 @@ const listSchema = {
         e.hidden = !keep(e);
         if (!e.hidden) n++;
       }
+      deal();
       if (count) count.textContent = `${n} ${n === 1 ? 'post' : 'posts'}`;
       if (!animate || calm.matches) return;
       for (const e of entries) {
@@ -152,9 +174,10 @@ const listSchema = {
 
     buttons.forEach((b) => b.addEventListener('click', () => apply(b.dataset.filter ?? '')));
     const initial = new URL(location.href).searchParams.get('topic');
+    deal();
     if (initial) apply(initial, false);
     moveBall(false);
-    addEventListener('resize', () => moveBall(false));
-    document.fonts?.ready.then(() => moveBall(false));
+    addEventListener('resize', () => { deal(); moveBall(false); });
+    document.fonts?.ready.then(() => { deal(); moveBall(false); });
   </script>
 </Base>
