@@ -94,8 +94,6 @@ const crumbs = {
         All posts
       </a></p>
       <p><time datetime={isoDate(data.date)}>{fmtDate(data.date)}</time></p>
-      {data.kind === 'essay' && <p>{readingMinutes(post.body)} min read</p>}
-      {data.sample && <p>{data.sample}</p>}
     </div>
     <header class="play post-head">
       <h1>{data.title}</h1>
