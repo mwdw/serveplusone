@@ -1,0 +1,9 @@
+Is Wimbledon getting slower?
+
+People love to say Wimbledon keeps getting slower despite consistent grass length (8mm) since 1995, seed type (ryegrass) since 2001, ball pressure since 1995
+
+Average men's rally lengths (IBM) are actually stable over 20+yrs and year to year variation aligns closely with weather
+
+Data: Wimbledon men's rally length (IBM) and daytime relative air density, 2004–2025
+Alt: Line chart of average men's rally length at Wimbledon, in shots per point, alongside relative air density from 2004 to 2025. Rally length moves between about 3.4 and 3.95 shots with no long-term rise and tracks air density, with a correlation of 0.57 overall and 0.74 for year-to-year changes.
+X: https://x.com/mattracquet/status/2019439156515021028

@@ -1,0 +1,7 @@
+Medvedev, the backhand outlier
+
+Medvedev is the only player in the Top 20 who hits more backhands than forehands
+
+Data: ATP top 20, last 52 weeks, all surfaces, 180,600 groundstrokes
+Alt: Bar chart of the forehand share of groundstrokes for the ATP top 20, against a top-20 average of 53.9%. Auger-Aliassime hits the most forehands (59.0%), and Medvedev is the only player below half, at 45.7%.
+X: https://x.com/mattracquet/status/2024207975355707619

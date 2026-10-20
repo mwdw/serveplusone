@@ -14,11 +14,18 @@ export const TOPICS: Record<string, RegExp[]> = {
   'Serve +1': [/\+\s?1\b/, /plus[- ]one/i, /server'?s (second|next) shot/i],
   'First serve': [/\b(first|1st)[- ]serve/i],
   'Second serve': [/\b(second|2nd)[- ]serve/i],
-  'Serve speed': [/serve (speed|pace)/i, /\bmph\b/i, /\bkm\/h\b/i],
+  'Serve speed': [/serve (speed|pace)/i],
   'Serve placement': [/serve (placement|direction|location|accuracy)/i, /wide serves?/i, /\bT serves?\b/, /body serves?/i, /landing (distance|spot|location)/i, /out wide/i],
+  'Serve dominance': [/serve dominan/i, /unreturned/i, /hold(s|ing)? serve/i, /hold (rate|%)/i, /\baces\b/i],
+  Return: [/\breturn/i],
   'Return position': [/return (position|contact|depth|stance)/i, /returners?\b.*\b(stand|position|contact|deep|depth)/i, /contact points? on .*serves?/i],
-  'Court position': [/rally contact/i, /court position/i, /behind the baseline/i, /rally position/i],
-  'Forehand vs backhand': [/forehand[\s\S]{0,200}backhand|backhand[\s\S]{0,200}forehand/i],
+  'Court position': [/rally contact/i, /court position/i, /rally position/i],
+  'Forehand vs backhand': [/\bforehands?\b[^.]{0,40}\bbackhands?\b(?!\s+(corners?|sides?|thirds?|grip))/i, /\bbackhands?\b[^.]{0,40}\bforehands?\b(?!\s+(corners?|sides?|thirds?|grip))/i],
+  Forehand: [/forehand/i],
+  Backhand: [/backhand/i],
+  'Shot direction': [/inside[- ](out|in)\b/i, /cross[- ]?court/i, /down the line/i, /shot direction/i],
+  'Spin and speed': [/\bspin rates?\b/i, /\brpm\b/i, /ball speed/i, /net clearance/i, /groundstroke speed/i],
+  'Drop shots': [/drop[- ]shots?/i],
   'Rally length': [/rally length/i, /shots? per rally/i, /(long|short|extended) rallies/i, /rally count/i],
   'Break points': [/break[- ]points?/i],
   Tiebreaks: [/tie-?breaks?/i],
@@ -27,12 +34,18 @@ export const TOPICS: Record<string, RegExp[]> = {
   'Surface comparison': [/\b(clay|hard|grass)\b[\s\S]{0,80}\b(clay|hard|grass)\b/i],
   Rankings: [/\belo\b/i, /rankings?\b/i],
   WTA: [/\bWTA\b/, /women'?s (tour|tennis|game)/i],
+  'Court speed': [/court speed/i, /getting (slower|faster)/i, /(slower|faster) (courts?|conditions|surface)/i],
+  'Balls and equipment': [/\bball changes?\b/i, /(new|newer|old|older|fresh|worn) balls/i, /\bstrings?\b.*\btension/i],
+  History: [/\b19[5-9]\d\b/, /\b(serve|open|golden|big three) era\b/i],
 };
 
 /** Broad topics that only count when the title or summary is about them. */
-const HEADLINE_ONLY = new Set(['First serve', 'Second serve']);
-/** If a post has the specific topic, drop the general one it implies. */
-const IMPLIES: Record<string, string> = { 'Return position': 'Court position' };
+const HEADLINE_ONLY = new Set(['First serve', 'Second serve', 'Return', 'Forehand', 'Backhand', 'Serve dominance']);
+/** If a post has the specific topic, drop the general ones it implies. */
+const IMPLIES: Record<string, string[]> = {
+  'Return position': ['Court position', 'Return'],
+  'Forehand vs backhand': ['Forehand', 'Backhand'],
+};
 
 /** Tournaments, tagged when the title, summary or writing mentions them. */
 export const EVENTS: Record<string, RegExp> = {
@@ -67,13 +80,22 @@ export const PLAYERS: Record<string, RegExp> = {
   Musetti: /\bmusetti\b/i,
   Mensik: /\bmen[sš]ik\b/i,
   Fonseca: /\bfonseca\b/i,
-  Jodar: /\bjodar\b/i,
+  Jodar: /\bj[oó]dar\b/i,
   Fils: /\bfils\b/i,
   Tien: /\btien\b/i,
   'Auger-Aliassime': /auger[- ]aliassime|\bFAA\b/,
   Bublik: /\bbublik\b/i,
   Rublev: /\brublev\b/i,
   Tsitsipas: /\btsitsipas\b/i,
+  'Davidovich Fokina': /davidovich fokina|\bADF\b/i,
+  Vacherot: /\bvacherot\b/i,
+  Darderi: /\bdarderi\b/i,
+  Tiafoe: /\btiafoe\b/i,
+  Cobolli: /\bcobolli\b/i,
+  Lehecka: /\bleh[eě]cka\b/i,
+  Khachanov: /\bkhachanov\b/i,
+  Sampras: /\bsampras\b/i,
+  'Ivanišević': /\bivani[sš]evi[cć]/i,
   Swiatek: /\b[sś]wi[aą]tek\b/i,
   Sabalenka: /\bsabalenka\b/i,
   Gauff: /\bgauff\b/i,
@@ -92,11 +114,18 @@ export function autoTags(opts: { headline: string; everything: string; story?: s
     const text = HEADLINE_ONLY.has(tag) ? opts.headline : opts.everything;
     if (patterns.some((p) => p.test(text))) out.add(tag);
   }
-  for (const [specific, general] of Object.entries(IMPLIES)) if (out.has(specific)) out.delete(general);
+  for (const [specific, general] of Object.entries(IMPLIES)) if (out.has(specific)) general.forEach((g) => out.delete(g));
   // Events: only from the headline and writing, so "data includes Monte Carlo" doesn't count.
   for (const [tag, p] of Object.entries(EVENTS)) if (p.test(opts.story ?? opts.everything)) out.add(tag);
   for (const [tag, p] of Object.entries(PLAYERS)) if (p.test(opts.headline)) out.add(tag);
   return [...out];
+}
+
+/** Remove general topics made redundant by a more specific one (applied to the final tag list). */
+export function tidy(tags: string[]): string[] {
+  const set = new Set(tags);
+  for (const [specific, general] of Object.entries(IMPLIES)) if (set.has(specific)) general.forEach((g) => set.delete(g));
+  return [...set];
 }
 
 /** Match a hand-written tag to the vocabulary's spelling, so "serve+1" and "Serve +1" are one topic. */

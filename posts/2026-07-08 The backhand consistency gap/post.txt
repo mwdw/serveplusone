@@ -1,0 +1,15 @@
+The backhand consistency gap
+
+A huge consistency gap downstream of backhand technique
+
+Djokovic and Auger-Aliassime make contact on backhands at a similar depth but Auger-Aliassime's backhands:
+
+1. miss more often into the net
+2. but are higher + spinnier over the net
+3. land shorter
+4. and miss more long
+
+Tags: Djokovic, Auger-Aliassime
+Data: ATP Tour events (no Slams), 2024–26, 8,433 and 4,670 rally backhands
+Alt: Distribution of where Auger-Aliassime's and Djokovic's rally backhands land, from the net to beyond the baseline. Both make contact about 0.7m behind the baseline, but Auger-Aliassime's heavier, higher backhand (2,368 rpm, 0.83m over the net) lands at a median 7.9m against Djokovic's 8.4m, and he misses more into the net (6.3% against 4.6%) and long (6.6% against 4.4%).
+X: https://x.com/mattracquet/status/2074862453909852465

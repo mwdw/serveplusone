@@ -1,0 +1,10 @@
+Serve +1 wing split
+
+How often do the Top 20 find their forehand on serve +1 (the shot after the serve) and how much of a cost is there to them hitting backhands instead.
+
+Zverev and Medvedev are very unusual. Huge outcome gaps for multiple players. (atp matches only)
+
+Tags: Zverev, Medvedev
+Data: ATP top 20 + prospects, first serves, 2025 and 2026 through June, all surfaces
+Alt: Chart of how often each of the ATP top 20 plus prospects plays a forehand, backhand or volley as their first shot after a first serve, and how often they win the point with each. On average 68% are forehands; Darderi hits the most (81%), Zverev and Medvedev the fewest (52%). Auger-Aliassime's forehand edge is the largest at 15 points (62% against 47%), Medvedev's the smallest at 2.
+X: https://x.com/mattracquet/status/2070537266720571696

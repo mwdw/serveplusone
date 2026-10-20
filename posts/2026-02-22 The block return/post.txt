@@ -1,0 +1,10 @@
+The block return
+
+The block return is pretty rare at the top of the men's game these days.
+
+Bublik uses it effectively against some players who can struggle with +1's (Zverev), but the best guys (esp Alcaraz/Sinner) have such effective post-serve aggression that blocking returns doesn't work
+
+Tags: Bublik
+Data: ATP top 20, last 52 weeks, all surfaces
+Alt: Bar chart of the share of returns hit with topspin rather than slice or block for the ATP top 20, sorted by topspin share; the tour average is 84% topspin. Sinner hits 95% topspin; Bublik slices or blocks the most at 32%, followed by Musetti at 29% and Ruud at 22%.
+X: https://x.com/mattracquet/status/2025550290015879391

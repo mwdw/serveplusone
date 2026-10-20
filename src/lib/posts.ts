@@ -17,7 +17,7 @@ import { getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import { marked } from 'marked';
 import path from 'node:path';
-import { autoTags, canonical } from './tags';
+import { autoTags, canonical, tidy } from './tags';
 
 export interface PostImage {
   src: ImageMetadata;
@@ -103,7 +103,7 @@ function parse(folder: string, raw: string, imgs: [string, ImageMetadata][], vid
         everything: [title, summary, body, alts, settings.data ?? ''].join('\n'),
         story: [title, summary, body].join('\n'),
       });
-  const tags = [...new Set([...manual, ...auto])];
+  const tags = tidy([...new Set([...manual, ...auto])]);
   const link = settings.x ?? settings.link;
 
   const postImages: PostImage[] = imgs.map(([file, src], i) => ({
