@@ -8,7 +8,12 @@ For e.g it'll probably surprise people that Medvedev, one of the flatter forehan
 
 It's a pretty distinct shot shape to most of the rest of the top 10 and it's also a good example of how different contact inputs (contact point, speed, spin) can affect the outputs (net clearance and depth)
 
+Top 20
+
+2-top-20.jpg
+
 Tags: Forehand, Medvedev
-Data: ATP top 10 rally forehands, last 52 weeks, ATP Tour events (no Slams), all surfaces
+Data: ATP top 10 and top 20 rally forehands, last 52 weeks, ATP Tour events (no Slams), all surfaces
 Alt: Table of the average rally forehand for each of the ATP top 10, from contact to bounce: contact distance behind the baseline, ball speed, spin, net clearance and depth. Sinner hits it fastest (82 mph, 3,177 rpm); Medvedev makes contact furthest back (1.30m), hits slowest but one (75 mph) with less spin (2,453 rpm), yet clears the net by the most (76cm) and still lands it 3.67m from the baseline.
+Alt 2: The same table for the ATP top 20, sorted by ball speed. Fils hits the fastest forehand (84 mph, 3,283 rpm) and de Minaur the slowest (74 mph) with the least spin (2,210 rpm), though he makes contact closest to the baseline (0.70m) and lands it deepest (3.54m short of the baseline). Darderi makes contact furthest back (1.44m), Mensik clears the net by the least (64cm), and Ruud and Djokovic by the most (79cm).
 X: https://x.com/mattracquet/status/2102804676248773030
