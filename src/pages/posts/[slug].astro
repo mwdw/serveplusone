@@ -99,7 +99,7 @@ const crumbs = {
     </div>
     <header class="play post-head">
       <h1>{data.title}</h1>
-      <p class="dek">{data.description}</p>
+      <p class="dek col">{data.description}</p>
     </header>
   </div>
 
@@ -107,7 +107,7 @@ const crumbs = {
     <div class="row">
       <div class="alley"></div>
       {block.type === 'text' ? (
-        <div class="play prose" set:html={block.html} />
+        <div class="play prose col" set:html={block.html} />
       ) : block.item.kind === 'image' ? (
         <figure class="play figure">
           <button
@@ -118,7 +118,7 @@ const crumbs = {
             aria-label={`Enlarge chart: ${block.item.image.alt}`}
             style={block.item.image === lead ? `view-transition-name: chart-${post.id}` : undefined}
           >
-            <Chart img={block.item.image} sizes="(min-width: 100rem) 86rem, (min-width: 46rem) 88vw, 100vw" priority={block.item.image === lead} />
+            <Chart img={block.item.image} sizes="(min-width: 72rem) 60rem, (min-width: 46rem) 84vw, 100vw" priority={block.item.image === lead} />
           </button>
           <figcaption>
             <span>{block.item.image.caption ?? ''}</span>

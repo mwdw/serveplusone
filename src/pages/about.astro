@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import { SITE } from '../site.config';
 
-const description = `${SITE.author.name} writes about tennis through data: serve and return patterns, shot placement and rally structure on the ATP tour.`;
+const description = `${SITE.author.name} works in tech and writes about tennis strategy, playstyle shifts and the future of the game, through data. Also behind The Racquet on Substack and courtspeed.com.`;
 const profile = {
   '@type': 'ProfilePage',
   '@id': new URL('/about', Astro.site).href,
@@ -21,11 +21,16 @@ const profile = {
   </div>
   <div class="row">
     <div class="alley"></div>
-    <div class="play prose page-body">
-      <!-- TODO(Matt): replace with your blurb -->
-      <p>Short bio to come.</p>
+    <div class="play prose col page-body">
       <p>
-        Find me on X at <a href={SITE.author.url} rel="me">@{SITE.author.x}</a>, or follow new posts by <a href="/rss.xml">RSS</a>.
+        Hi, I'm Matt. I work in tech but also think quite a lot about tennis strategy, playstyle shifts, and what tennis
+        might look like in the future. You can find me on X <a href={SITE.author.url} rel="me">here</a>, read my older
+        long-form tennis analysis <a href="https://theracquet.substack.com/" rel="me">here</a>, and find the court speed
+        database <a href="https://courtspeed.com/" rel="me">here</a>.
+      </p>
+      <p>
+        My old Substack and this new site are read by a diverse mix of tennis executives, coaches, players, and fans.
+        Thank you for reading!
       </p>
     </div>
   </div>

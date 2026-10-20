@@ -8,7 +8,7 @@ export const SITE = {
     x: 'mattracquet',
     url: 'https://x.com/mattracquet',
     // Add more profiles here (courtspeed.com, LinkedIn…) — they feed the Person schema.
-    sameAs: ['https://x.com/mattracquet', 'https://courtspeed.com'],
+    sameAs: ['https://x.com/mattracquet', 'https://courtspeed.com', 'https://theracquet.substack.com'],
   },
   locale: 'en_GB',
   lang: 'en-GB',

@@ -33,6 +33,8 @@
   --rule-gap: 0.55rem;
   --page: 100rem;
   --measure: 38rem;
+  /* Post column: writing, charts and video all share these margins */
+  --post: 60rem;
   --pad: clamp(1rem, 3vw, 2.5rem);
 
   color-scheme: dark;
@@ -306,7 +308,7 @@ p { margin: 0; text-wrap: pretty; }
 }
 .post-head .dek { margin-top: 1rem; font-size: clamp(1.125rem, 1rem + 0.4vw, 1.3125rem); line-height: 1.45; max-width: var(--measure); font-family: var(--serif); color: var(--ink); }
 
-.figure { margin: 0 0 clamp(2rem, 4vw, 3rem); }
+.figure { margin: clamp(1.25rem, 2.5vw, 2rem) 0 clamp(2rem, 4vw, 3rem); max-width: var(--post); box-sizing: content-box; }
 .figure + .figure { margin-top: -0.5rem; }
 .figure button.zoom {
   all: unset;
@@ -327,6 +329,8 @@ p { margin: 0; text-wrap: pretty; }
   font-variation-settings: 'opsz' 16;
 }
 .prose > * + * { margin-top: 1.05em; }
+.prose.col { max-width: var(--post); box-sizing: content-box; font-size: clamp(1.125rem, 1.04rem + 0.35vw, 1.375rem); line-height: 1.6; }
+.post-head .dek.col { max-width: var(--post); }
 .prose h2 { font-size: 1.6em; line-height: 1.15; margin-top: 1.9em; }
 .prose h3 { font-size: 1.25em; margin-top: 1.6em; }
 .prose blockquote { margin-inline: 0; padding-left: 1.1rem; border-left: 1px solid var(--line-strong); color: var(--muted); }
