@@ -1,6 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
+import { Image } from 'astro:assets';
 import { SITE } from '../site.config';
+import portrait from '../assets/matt.jpg';
 
 const description = `${SITE.author.name} works in tech and writes about tennis strategy, playstyle shifts and the future of the game, through data. Also behind The Racquet on Substack and courtspeed.com.`;
 const profile = {
@@ -17,6 +19,7 @@ const profile = {
     <div class="alley"></div>
     <header class="play post-head">
       <h1>{SITE.author.name}</h1>
+      <Image class="portrait" src={portrait} alt={`${SITE.author.name}`} widths={[160, 320]} sizes="160px" width={160} height={160} format="webp" quality={85} loading="eager" />
     </header>
   </div>
   <div class="row">
@@ -27,10 +30,6 @@ const profile = {
         might look like in the future. You can find me on X <a href={SITE.author.url} rel="me">here</a>, read my older
         long-form tennis analysis <a href="https://theracquet.substack.com/" rel="me">here</a>, and find the court speed
         database <a href="https://courtspeed.com/" rel="me">here</a>.
-      </p>
-      <p>
-        My old Substack and this new site are read by a diverse mix of tennis executives, coaches, players, and fans.
-        Thank you for reading!
       </p>
     </div>
   </div>

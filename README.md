@@ -33,6 +33,8 @@ Each post is a folder inside `posts/`, containing your chart image(s) and a text
 
 **Videos:** MP4 is safest. GitHub's website accepts files up to 25 MB; for bigger ones use GitHub Desktop (up to 100 MB). Add `Autoplay: yes` to make a post's videos play silently on a loop, which suits short animated charts.
 
+**Summary somewhere else:** add a `Summary:` line at the bottom with the text for the home page and Google. The writing then starts straight after the title, in the order you wrote it, so a chart or video filename can come before the first paragraph.
+
 **Hiding or deleting:** add `Hide: yes` to the bottom of `post.txt`, or delete the folder.
 
 ---

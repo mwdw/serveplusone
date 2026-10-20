@@ -45,6 +45,8 @@ export interface Post {
   data: {
     title: string;
     description: string;
+    /** Show the summary under the title (false when a "Summary:" line moves it into the writing). */
+    dek: boolean;
     date: Date;
     tags: string[];
     /** Images only, in filename order. The first is the thumbnail and social card. */
@@ -64,7 +66,7 @@ const images = import.meta.glob('/posts/*/*.{png,jpg,jpeg,webp,avif,gif,PNG,JPG,
 const videos = import.meta.glob('/posts/*/*.{mp4,webm,mov,m4v,MP4,WEBM,MOV,M4V}', { query: '?url', import: 'default', eager: true }) as Record<string, string>;
 const MIME: Record<string, string> = { mp4: 'video/mp4', m4v: 'video/mp4', webm: 'video/webm', mov: 'video/quicktime' };
 
-const SETTINGS = /^(tags?|topics?|data|alt(?:\s*\d+)?|caption(?:\s*\d+)?|hide|hidden|pin|pinned|type|date|x|link|autoplay|auto\s*tags)\s*:\s*(.*)$/i;
+const SETTINGS = /^(summary|tags?|topics?|data|alt(?:\s*\d+)?|caption(?:\s*\d+)?|hide|hidden|pin|pinned|type|date|x|link|autoplay|auto\s*tags)\s*:\s*(.*)$/i;
 const yes = (v = '') => /^(y|yes|true|1)$/i.test(v.trim());
 
 export const slugify = (s: string) =>
@@ -85,7 +87,10 @@ function parse(folder: string, raw: string, imgs: [string, ImageMetadata][], vid
 
   const paras = lines.join('\n').trim().split(/\n\s*\n/);
   const title = (paras.shift() ?? folder).replace(/^#+\s*/, '').replace(/\n/g, ' ').trim();
-  const summary = (paras.shift() ?? '').trim();
+  // A "Summary:" line sets the home-page/Google summary separately, and the
+  // writing then starts straight after the title (nothing shown under it).
+  const dek = !settings.summary;
+  const summary = dek ? (paras.shift() ?? '').trim() : settings.summary;
   const body = paras.join('\n\n').trim();
 
   const dateStr = settings.date || folder.match(/^(\d{4}-\d{2}-\d{2})/)?.[1];
@@ -148,12 +153,13 @@ function parse(folder: string, raw: string, imgs: [string, ImageMetadata][], vid
   return {
     id: slugify(name),
     folder,
-    body: [summary, body].filter(Boolean).join('\n\n'),
+    body: (dek ? [summary, body] : [body]).filter(Boolean).join('\n\n'),
     html: body ? (marked.parse(body, { async: false }) as string) : '',
     blocks,
     data: {
       title,
       description: plainSummary || title,
+      dek,
       date,
       tags,
       sample: settings.data || undefined,

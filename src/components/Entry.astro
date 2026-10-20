@@ -8,7 +8,7 @@ const lead = post.data.images[0];
 const extra = post.data.images.length - 1;
 ---
 
-<article class="entry" data-tags={post.data.tags.map(tagSlug).join(' ')}>
+<article class="entry" data-tags={post.data.tags.map(tagSlug).join(' ')} data-search={[post.data.title, post.data.description, ...post.data.tags].join(' ').toLowerCase()}>
   <a class="card" href={`/posts/${post.id}`}>
     {lead && (
       <div class="thumb" style={`view-transition-name: chart-${post.id}`}>

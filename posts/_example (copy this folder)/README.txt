@@ -25,6 +25,13 @@ THE OPTIONAL LINES AT THE BOTTOM OF post.txt
            say. To remove a wrong automatic tag, put a minus in front of it:
            "Tags: Sinner, -ATP Finals". "Auto tags: no" switches automatic
            tagging off for a post.
+   Summary: optional. Normally the paragraph straight after the title is the
+           summary: it's shown under the title, on the home page card and in
+           Google. If you'd rather the writing just flow (say the first chart, or
+           a video, should come before that paragraph), add a Summary line with the
+           text for the home page and Google. Nothing is then shown under the
+           title, and everything after the title appears in the order you wrote
+           it, chart and video filenames included.
    Data:   what the data covers, shown next to the chart.
    Alt:    a description of what the chart shows (Alt 2:, Alt 3: for further
            images). Worth writing properly: it feeds the automatic tags, Google

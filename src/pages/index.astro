@@ -38,12 +38,17 @@ const listSchema = {
       <p class="month-label"><strong data-count>{posts.length} posts</strong></p>
     </div>
     <section class="play archive" aria-label="Posts">
+      <div class="finder" role="search">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.75" fill="none" stroke="currentColor" stroke-width="1.5" /><path d="m13 13 4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>
+        <input id="q" type="search" list="topic-list" placeholder="Search topics, players, posts" aria-label="Search posts by topic, player or title" autocomplete="off" enterkeyhint="search" />
+        <datalist id="topic-list">{tags.map((t) => <option value={t.name} />)}</datalist>
+      </div>
       {tags.length > 1 && (
         <div class="filter" role="group" aria-label="Filter by topic">
           <span class="filter-mark" aria-hidden="true"></span>
           <button type="button" aria-pressed="true" data-filter="">All<sup>{posts.length}</sup></button>
           {tags.map((t) => (
-            <button type="button" aria-pressed="false" data-filter={t.slug}>{t.name}<sup>{t.count}</sup></button>
+            <button type="button" aria-pressed="false" data-filter={t.slug} data-name={t.name}>{t.name}<sup>{t.count}</sup></button>
           ))}
         </div>
       )}
@@ -88,19 +93,14 @@ const listSchema = {
     }
 
     // Cards slide to their new places instead of jumping (FLIP).
-    function apply(tag: string, animate = true) {
+    function show(keep: (e: HTMLElement) => boolean, animate = true) {
       const before = new Map(entries.filter((e) => !e.hidden).map((e) => [e, e.getBoundingClientRect()]));
-      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.filter === tag)));
       let n = 0;
       for (const e of entries) {
-        e.hidden = !!tag && !e.dataset.tags!.split(' ').includes(tag);
+        e.hidden = !keep(e);
         if (!e.hidden) n++;
       }
       if (count) count.textContent = `${n} ${n === 1 ? 'post' : 'posts'}`;
-      moveBall(animate);
-      const url = new URL(location.href);
-      tag ? url.searchParams.set('topic', tag) : url.searchParams.delete('topic');
-      history.replaceState(null, '', url);
       if (!animate || calm.matches) return;
       for (const e of entries) {
         if (e.hidden) continue;
@@ -114,6 +114,41 @@ const listSchema = {
         }
       }
     }
+
+    const search = document.querySelector<HTMLInputElement>('#q');
+    const nameOf = (slug: string) => [...buttons].find((b) => b.dataset.filter === slug)?.dataset.name ?? '';
+    function setTopicParam(tag: string) {
+      const url = new URL(location.href);
+      tag ? url.searchParams.set('topic', tag) : url.searchParams.delete('topic');
+      history.replaceState(null, '', url);
+    }
+
+    // Topic buttons (wider screens).
+    function apply(tag: string, animate = true) {
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.filter === tag)));
+      show((e) => !tag || e.dataset.tags!.split(' ').includes(tag), animate);
+      moveBall(animate);
+      setTopicParam(tag);
+      if (search) search.value = tag ? nameOf(tag) : '';
+    }
+
+    // Search box (phones): an exact topic name filters by that topic, anything else
+    // matches titles, summaries and topics, word by word.
+    function find(raw: string) {
+      const q = raw.trim().toLowerCase();
+      const topic = [...buttons].find((b) => b.dataset.filter && (b.dataset.name ?? '').toLowerCase() === q)?.dataset.filter ?? '';
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.filter === (q ? topic : ''))));
+      if (!q) show(() => true);
+      else if (topic) show((e) => e.dataset.tags!.split(' ').includes(topic));
+      else {
+        const words = q.split(/\s+/);
+        show((e) => words.every((w) => e.dataset.search!.includes(w)));
+      }
+      setTopicParam(topic);
+      moveBall(false);
+    }
+    search?.addEventListener('input', () => find(search.value));
+    search?.addEventListener('keydown', (ev) => { if (ev.key === 'Enter') search.blur(); });
 
     buttons.forEach((b) => b.addEventListener('click', () => apply(b.dataset.filter ?? '')));
     const initial = new URL(location.href).searchParams.get('topic');

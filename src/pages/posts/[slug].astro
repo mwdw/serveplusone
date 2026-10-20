@@ -99,7 +99,7 @@ const crumbs = {
     </div>
     <header class="play post-head">
       <h1>{data.title}</h1>
-      <p class="dek col">{data.description}</p>
+      {data.dek && <p class="dek col">{data.description}</p>}
     </header>
   </div>
 

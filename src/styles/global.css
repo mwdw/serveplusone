@@ -266,6 +266,23 @@ p { margin: 0; text-wrap: pretty; }
 }
 .filter-mark.is-ready { opacity: 1; }
 .filter { padding-bottom: 0.4rem; }
+/* Search box: replaces the topic buttons on phones */
+.finder { display: none; position: relative; align-items: center; }
+.finder svg { position: absolute; left: 0.85rem; width: 1rem; height: 1rem; color: var(--muted); pointer-events: none; }
+.finder input {
+  width: 100%;
+  font: inherit;
+  font-size: 1rem; /* 16px stops iOS zooming in */
+  color: var(--chalk);
+  background: var(--court-2);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.6rem 1rem 0.6rem 2.4rem;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.finder input::placeholder { color: var(--muted); }
+.finder input:focus { outline: none; border-color: var(--ball); }
 
 /* Masonry of cards, as on the old site: 3 across, 2 on tablets, 1 on phones */
 .grid { column-count: 3; column-gap: 22px; }
@@ -492,6 +509,9 @@ dialog.viewer[open] .viewer-stage img { animation: viewer-img 0.35s cubic-bezier
 a, .prose a { text-decoration-color: color-mix(in srgb, currentColor 45%, transparent); transition: text-decoration-color 0.2s, color 0.2s; }
 .prose a:hover, .tags a:hover, .site-footer a:hover { text-decoration-color: var(--ball); }
 
+/* About portrait */
+.portrait { width: clamp(7rem, 12vw, 10rem); height: auto; aspect-ratio: 1; border-radius: 50%; object-fit: cover; margin-top: clamp(1.25rem, 3vw, 2rem); box-shadow: 0 0 0 1px var(--line); }
+
 /* ── Small screens: the alley folds into a pair of horizontal rules ── */
 @media (max-width: 46rem) {
   .court { grid-template-columns: minmax(0, 1fr); }
@@ -511,6 +531,11 @@ a, .prose a { text-decoration-color: color-mix(in srgb, currentColor 45%, transp
   }
   .alley > * + * { margin-top: 0; }
   .alley:empty, .alley.desktop-only { display: none; }
+  .filter { display: none; }
+  .finder { display: flex; margin-bottom: 1.25rem; }
+  /* the header already draws the baseline; skip the alley's double rule right under it */
+  .court > .row:first-child > .alley { background: none; padding-top: 0.25rem; }
+  .court > .row:first-child > .alley:empty + .post-head { padding-top: 2rem; }
   .back-wrap { flex-basis: 100%; margin-bottom: 0.5rem; }
   .intro { padding-top: 2rem; }
   .post-head { padding-top: 1.25rem; }

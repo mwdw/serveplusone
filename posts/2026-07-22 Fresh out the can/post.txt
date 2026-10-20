@@ -1,13 +1,14 @@
 Fresh out the can
 
-This is so interesting because there's a measurable impact from newer/older balls on rates of aces, holds, unreturned, double faults, 1st serve in %, rally length et al.
-
 *On the ATP's trial of more frequent ball changes at the Lexington Challenger.*
+
+This is so interesting because there's a measurable impact from newer/older balls on rates of aces, holds, unreturned, double faults, 1st serve in %, rally length et al.
 
 So if balls are changed more often, in theory things like serve dominance may increase (from existing all time highs btw). Impact will likely be small (double faults also rise with newer balls, 1st serve in % decreases modestly, & hold rate changes are smaller). Probably only detectable for season-aggregated unreturned/ace rates and multi-season aggregates for hold rates.
 
 But it's probably easy to underestimate 2nd & 3rd order effects supposedly small tweaks like this can have on the way the game is played. Tennis is already massively short point and serve dominant, and changes like this nudge it slightly further in that direction
 
+Summary: This is so interesting because there's a measurable impact from newer/older balls on rates of aces, holds, unreturned, double faults, 1st serve in %, rally length et al.
 Auto tags: no
 Tags: Balls and equipment, Serve dominance, First serve
 Data: Men's tour-level hard courts, 2022–26, 1,528 charted matches (Tennis Abstract Match Charting Project)
