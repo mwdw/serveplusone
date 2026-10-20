@@ -227,7 +227,7 @@ export function allTags(posts: Post[]) {
 
 export const dims = (img: PostImage) => ({ width: img.src.width, height: img.src.height });
 
-/** Full-resolution file for the zoom view and "Full resolution" link. */
+/** Full-resolution file for the zoom view (click a chart to enlarge). */
 export async function hiresUrl(img: PostImage): Promise<string> {
   const out = await getImage({ src: img.src, width: img.src.width, format: img.src.format as any, quality: 95 });
   return out.src;

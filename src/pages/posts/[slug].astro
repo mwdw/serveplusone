@@ -120,10 +120,7 @@ const crumbs = {
           >
             <Chart img={block.item.image} sizes="(min-width: 72rem) 60rem, (min-width: 46rem) 84vw, 100vw" priority={block.item.image === lead} />
           </button>
-          <figcaption>
-            <span>{block.item.image.caption ?? ''}</span>
-            <a href={hiresOf.get(block.item.image)} target="_blank" rel="noopener">Full resolution</a>
-          </figcaption>
+          {block.item.image.caption && <figcaption>{block.item.image.caption}</figcaption>}
         </figure>
       ) : (
         <figure class="play figure video">
