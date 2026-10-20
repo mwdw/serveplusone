@@ -1,0 +1,125 @@
+---
+import Base from '../layouts/Base.astro';
+import Entry from '../components/Entry.astro';
+import { SITE } from '../site.config';
+import { getPosts, allTags, socialImage } from '../lib/posts';
+
+const all = await getPosts();
+// Featured posts are pinned to the front; everything else stays newest-first.
+const posts = [...all.filter((p) => p.data.featured), ...all.filter((p) => !p.data.featured)];
+const tags = allTags(posts).filter((t) => t.count > 1 || posts.length < 8);
+const lead = posts[0];
+
+const ogImg = lead ? await socialImage(lead.data.images[0], Astro.site!, lead.id) : undefined;
+const listSchema = {
+  '@type': 'CollectionPage',
+  '@id': new URL('/#collection', Astro.site).href,
+  name: `${SITE.name}: ${SITE.tagline}`,
+  url: Astro.site!.href,
+  isPartOf: { '@id': new URL('/#website', Astro.site).href },
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: posts.map((p, i) => ({ '@type': 'ListItem', position: i + 1, url: new URL(`/posts/${p.id}`, Astro.site).href, name: p.data.title })),
+  },
+};
+---
+
+<Base image={ogImg && { ...ogImg, alt: lead?.data.images[0]?.alt }} schema={[listSchema]}>
+  <div class="row">
+    <div class="alley" aria-hidden="true"></div>
+    <section class="play intro">
+      <h1>{SITE.tagline}</h1>
+      <p>by {SITE.author.name}</p>
+    </section>
+  </div>
+
+  <div class="row">
+    <div class="alley desktop-only">
+      <p class="month-label"><strong data-count>{posts.length} posts</strong></p>
+    </div>
+    <section class="play archive" aria-label="Posts">
+      {tags.length > 1 && (
+        <div class="filter" role="group" aria-label="Filter by topic">
+          <span class="filter-mark" aria-hidden="true"></span>
+          <button type="button" aria-pressed="true" data-filter="">All<sup>{posts.length}</sup></button>
+          {tags.map((t) => (
+            <button type="button" aria-pressed="false" data-filter={t.slug}>{t.name}<sup>{t.count}</sup></button>
+          ))}
+        </div>
+      )}
+      <div class="grid">
+        {posts.map((p, i) => <Entry post={p} priority={i < 4} />)}
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const mark = document.querySelector<HTMLElement>('.filter-mark');
+    const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+    const entries = [...document.querySelectorAll<HTMLElement>('.entry[data-tags]')];
+    const count = document.querySelector('[data-count]');
+    const calm = matchMedia('(prefers-reduced-motion: reduce)');
+    let at: { x: number; y: number } | null = null;
+
+    // The ball sits under the active topic and hops in an arc when you pick another.
+    function moveBall(animate: boolean) {
+      const on = document.querySelector<HTMLElement>('[data-filter][aria-pressed="true"]');
+      if (!on || !mark) return;
+      const to = { x: on.offsetLeft + on.offsetWidth / 2 - 3.5, y: on.offsetTop + on.offsetHeight + 1 };
+      const from = at;
+      at = to;
+      mark.style.transform = `translate(${to.x}px, ${to.y}px)`;
+      mark.classList.add('is-ready');
+      if (!animate || !from || calm.matches || (from.x === to.x && from.y === to.y)) return;
+      const dist = Math.hypot(to.x - from.x, to.y - from.y);
+      const lift = Math.min(28, 10 + dist * 0.08);
+      const ease = (t: number) => (t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2);
+      const frames: Keyframe[] = [];
+      for (let i = 0; i <= 16; i++) {
+        const t = i / 16, e = ease(t);
+        const x = from.x + (to.x - from.x) * e;
+        const y = from.y + (to.y - from.y) * e - lift * 4 * e * (1 - e);
+        frames.push({ transform: `translate(${x}px, ${y}px)`, offset: t * 0.85 });
+      }
+      // a little squash on landing
+      frames.push({ transform: `translate(${to.x}px, ${to.y + 1}px) scale(1.25, 0.7)`, offset: 0.93 });
+      frames.push({ transform: `translate(${to.x}px, ${to.y}px)`, offset: 1 });
+      mark.animate(frames, { duration: 520, easing: 'linear' });
+    }
+
+    // Cards slide to their new places instead of jumping (FLIP).
+    function apply(tag: string, animate = true) {
+      const before = new Map(entries.filter((e) => !e.hidden).map((e) => [e, e.getBoundingClientRect()]));
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.filter === tag)));
+      let n = 0;
+      for (const e of entries) {
+        e.hidden = !!tag && !e.dataset.tags!.split(' ').includes(tag);
+        if (!e.hidden) n++;
+      }
+      if (count) count.textContent = `${n} ${n === 1 ? 'post' : 'posts'}`;
+      moveBall(animate);
+      const url = new URL(location.href);
+      tag ? url.searchParams.set('topic', tag) : url.searchParams.delete('topic');
+      history.replaceState(null, '', url);
+      if (!animate || calm.matches) return;
+      for (const e of entries) {
+        if (e.hidden) continue;
+        const now = e.getBoundingClientRect();
+        const was = before.get(e);
+        if (was) {
+          const dx = was.left - now.left, dy = was.top - now.top;
+          if (dx || dy) e.animate([{ transform: `translate(${dx}px, ${dy}px)` }, { transform: 'none' }], { duration: 450, easing: 'cubic-bezier(0.3, 0.7, 0.2, 1)' });
+        } else {
+          e.animate([{ opacity: 0, transform: 'scale(0.97)' }, { opacity: 1, transform: 'none' }], { duration: 320, delay: 80, easing: 'ease-out', fill: 'backwards' });
+        }
+      }
+    }
+
+    buttons.forEach((b) => b.addEventListener('click', () => apply(b.dataset.filter ?? '')));
+    const initial = new URL(location.href).searchParams.get('topic');
+    if (initial) apply(initial, false);
+    moveBall(false);
+    addEventListener('resize', () => moveBall(false));
+    document.fonts?.ready.then(() => moveBall(false));
+  </script>
+</Base>

@@ -1,0 +1,29 @@
+---
+import Chart from './Chart.astro';
+import { tagSlug, readingMinutes, fmtDate, isoDate, type Post } from '../lib/posts';
+
+interface Props { post: Post; priority?: boolean; }
+const { post, priority = false } = Astro.props;
+const lead = post.data.images[0];
+const extra = post.data.images.length - 1;
+---
+
+<article class="entry" data-tags={post.data.tags.map(tagSlug).join(' ')}>
+  <a class="card" href={`/posts/${post.id}`}>
+    {lead && (
+      <div class="thumb" style={`view-transition-name: chart-${post.id}`}>
+        <Chart img={lead} sizes="(min-width: 110rem) 24rem, (min-width: 74rem) 30vw, (min-width: 44rem) 45vw, 92vw" priority={priority} />
+      </div>
+    )}
+    <div class="card-meta">
+      <h2>{post.data.title}</h2>
+      <p>{post.data.description}</p>
+      <p class="kind">
+        <time datetime={isoDate(post.data.date)}>{fmtDate(post.data.date, 'month')}</time>
+        {post.data.kind === 'essay' && <span>Essay, {readingMinutes(post.body)} min read</span>}
+        {extra > 0 && <span>{extra + 1} charts</span>}
+        {post.data.videos.length > 0 && <span>Video</span>}
+      </p>
+    </div>
+  </a>
+</article>

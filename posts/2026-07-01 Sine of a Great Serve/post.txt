@@ -1,0 +1,8 @@
+Sine of a Great Serve
+
+Average first-serve speed against first-serve accuracy for the ATP top 20.
+
+A serve profile map comparing pace and landing precision across the top of the tour.
+
+Data: ATP top 20, last 52 weeks
+Alt: Scatter plot of the ATP top 20 by average first-serve speed (114 to 130 mph) against first-serve accuracy, measured as average landing distance from the side or centre line (lower is more precise), coloured by player height. Zverev and Mensik serve fastest at 128 mph, Djokovic is the most accurate at about 50cm at the tour-average 119 mph, and Fritz and Mensik combine pace with accuracy of around 51 to 52cm.

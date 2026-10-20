@@ -1,0 +1,8 @@
+First-Serve Compass
+
+First-serve in rate against first-serve points won, with top players and prospects plotted together.
+
+A quadrant view of first-serve reliability and first-serve damage.
+
+Data: ATP tracked matches, 2025–2026
+Alt: Quadrant chart of first-serve in percentage against first-serve points won for the ATP top 10 plus prospects Jodar, Fils, Fonseca and Tien, 2025–26, with medians at 65.5% in and 75.7% won. Sinner wins the most behind his first serve (about 82%) at roughly the median in-rate, Zverev lands the most (about 71.5%), and de Minaur, Tien and Jodar sit in the lands-fewer, wins-fewer quadrant.

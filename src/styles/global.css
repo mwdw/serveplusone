@@ -1,0 +1,519 @@
+@import '@fontsource-variable/newsreader/opsz.css';
+@import '@fontsource-variable/newsreader/opsz-italic.css';
+@import '@fontsource-variable/schibsted-grotesk';
+
+/* ── Serve Plus One ────────────────────────────────────
+   Night session: slate hard court, chalk lines, one ball.
+   Day session: cool line-paint white, court ink.            */
+:root {
+  --court: #142231;
+  --court-2: #1b2c3e;
+  --chalk: #eef1ea;
+  --ink: #d8dfe5;
+  --muted: #8e9fb1;
+  --line: rgb(238 241 234 / 0.22);
+  --line-strong: rgb(238 241 234 / 0.62);
+  --scrim: rgb(9 16 24 / 0.94);
+  /* Cards, after the old MW site: a slightly lifted tile with a barely-there edge */
+  --tile: #192a3b;
+  --tile-edge: rgb(238 241 234 / 0.09);
+  --tile-edge-hover: rgb(238 241 234 / 0.24);
+  /* Ball yellow: only ever appears in response to the reader (hover, focus, active) */
+  --ball: #dbe46f;
+  --select: #dbe46f;
+  --ball-fill: #dbe46f;
+  --ball-edge: transparent;
+  --net-tape: rgb(238 241 234 / 0.5);
+
+  --serif: 'Newsreader Variable', 'Iowan Old Style', Georgia, serif;
+  --sans: 'Schibsted Grotesk Variable', ui-sans-serif, system-ui, sans-serif;
+
+  /* Doubles alley: the width of the gutter that holds dates & metadata */
+  --alley: clamp(4.5rem, 8vw, 7.5rem);
+  --rule-gap: 0.55rem;
+  --page: 100rem;
+  --measure: 38rem;
+  --pad: clamp(1rem, 3vw, 2.5rem);
+
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme='dark']) {
+    --court: #f1f3f0;
+    --court-2: #e5e9e5;
+    --chalk: #16212c;
+    --ink: #24303b;
+    --muted: #5b6b7a;
+    --line: rgb(22 33 44 / 0.18);
+    --line-strong: rgb(22 33 44 / 0.55);
+    --scrim: rgb(241 243 240 / 0.96);
+    --tile: #e6eae5;
+    --tile-edge: rgb(22 33 44 / 0.1);
+    --tile-edge-hover: rgb(22 33 44 / 0.28);
+    --ball: #5e6b00;
+    --select: #e3ea7d;
+    --ball-fill: #d7e24f;
+    --ball-edge: #6f7d00;
+    --net-tape: rgb(22 33 44 / 0.45);
+    color-scheme: light;
+  }
+}
+:root[data-theme='light'] {
+  --court: #f1f3f0;
+  --court-2: #e5e9e5;
+  --chalk: #16212c;
+  --ink: #24303b;
+  --muted: #5b6b7a;
+  --line: rgb(22 33 44 / 0.18);
+  --line-strong: rgb(22 33 44 / 0.55);
+  --scrim: rgb(241 243 240 / 0.96);
+  --tile: #e6eae5;
+  --tile-edge: rgb(22 33 44 / 0.1);
+  --tile-edge-hover: rgb(22 33 44 / 0.28);
+  --ball: #5e6b00;
+  --select: #e3ea7d;
+  --ball-fill: #d7e24f;
+  --ball-edge: #6f7d00;
+  --net-tape: rgb(22 33 44 / 0.45);
+  color-scheme: light;
+}
+
+/* ── Base ─────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-padding-top: 2rem; }
+body {
+  margin: 0;
+  background: var(--court);
+  color: var(--ink);
+  font: 400 1rem/1.55 var(--sans);
+  font-feature-settings: 'ss01', 'tnum' 0;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+img, picture, svg { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--chalk); outline-offset: 3px; border-radius: 2px; }
+::selection { background: var(--select); color: #142231; }
+h1, h2, h3 { color: var(--chalk); font-family: var(--serif); font-weight: 400; margin: 0; text-wrap: balance; }
+p { margin: 0; text-wrap: pretty; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.skip { position: absolute; left: 1rem; top: -4rem; background: var(--chalk); color: var(--court); padding: 0.5rem 0.9rem; z-index: 10; }
+.skip:focus { top: 1rem; }
+
+/* ── Page frame + the alley ────────────────────────────
+   Two parallel court lines run the height of the page, like a
+   doubles alley. Dates, back links and data notes live in the
+   alley; content lives on the court.                         */
+.frame {
+  width: 100%;
+  max-width: var(--page);
+  margin-inline: auto;
+  padding-inline: var(--pad);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.court {
+  position: relative;
+  flex: 1;
+  display: grid;
+  grid-template-columns: var(--alley) minmax(0, 1fr);
+  align-content: start;
+}
+.court::before,
+.court::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--line-strong);
+  left: var(--alley);
+  pointer-events: none;
+}
+.court::after { left: calc(var(--alley) + var(--rule-gap)); }
+
+/* A row = alley cell + court cell. */
+.row { display: contents; }
+.alley {
+  grid-column: 1;
+  padding: 0.2rem 1.25rem 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--muted);
+  text-align: right;
+}
+.alley > * + * { margin-top: 0.15rem; }
+.alley strong { color: var(--ink); font-weight: 500; }
+.play {
+  grid-column: 2;
+  min-width: 0;
+  padding-left: calc(var(--rule-gap) + clamp(1rem, 2.2vw, 2.25rem));
+}
+
+/* ── Header / footer ──────────────────────────────────── */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 1.4rem 1.2rem;
+  border-bottom: 1px solid var(--line);
+}
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: var(--chalk);
+  font: 500 1.3125rem/1 var(--serif);
+  font-variation-settings: 'opsz' 36;
+  letter-spacing: -0.012em;
+}
+/* The mark: the net and the centre line make a plus; the ball in the box is the one. */
+.mark { width: 1.75rem; height: 1.75rem; flex: none; overflow: visible; }
+.mark path { fill: none; stroke: currentColor; stroke-linecap: round; }
+.mark .mk-net { stroke-width: 2.3; }
+.mark .mk-centre { stroke-width: 1.5; }
+.mark .mk-ball { fill: var(--ball-fill); stroke: var(--ball-edge); stroke-width: 0.8; transform-box: fill-box; transform-origin: center; }
+.nav { display: flex; gap: clamp(1rem, 3vw, 2rem); font-size: 0.9375rem; }
+.nav a {
+  text-decoration: none;
+  color: var(--muted);
+  padding-block: 0.4rem;
+  background: linear-gradient(var(--chalk), var(--chalk)) 0 100% / 0 1px no-repeat;
+  transition: color 0.2s, background-size 0.3s cubic-bezier(0.3, 0.7, 0.2, 1);
+}
+.nav a:hover, .nav a[aria-current='page'] { color: var(--chalk); background-size: 100% 1px; }
+
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.75rem 2rem;
+  padding-block: 0.75rem 2.25rem;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+.site-footer nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+.site-footer a { color: var(--muted); }
+.site-footer a:hover { color: var(--chalk); }
+.theme-toggle {
+  font: inherit;
+  color: var(--muted);
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+.theme-toggle:hover { color: var(--chalk); }
+
+/* ── Home ─────────────────────────────────────────────── */
+.intro { padding-block: clamp(2rem, 4.5vw, 3.5rem) 0; }
+.intro h1 {
+  font-size: clamp(2.2rem, 1.3rem + 3.4vw, 4.25rem);
+  line-height: 1.02;
+  letter-spacing: -0.022em;
+  font-variation-settings: 'opsz' 72;
+  max-width: 26ch;
+}
+.intro p { margin-top: 0.6rem; color: var(--muted); font-size: 1.0625rem; }
+
+.archive { padding-block: clamp(1.25rem, 2.2vw, 1.75rem) clamp(3rem, 6vw, 5rem); }
+.month-label { position: sticky; top: 1.25rem; padding-top: 0.25rem; }
+
+.filter {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.25rem;
+  margin-bottom: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-size: 0.9375rem;
+}
+.filter button {
+  font: inherit;
+  background: none;
+  border: 0;
+  padding: 0.2rem 0 0.35rem;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.filter button:hover { color: var(--chalk); }
+.filter button[aria-pressed='true'] { color: var(--chalk); }
+.filter sup { font-size: 0.7em; margin-left: 0.15em; color: var(--muted); }
+/* The ball under the active topic; it hops to whichever topic you pick */
+.filter-mark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ball-fill);
+  box-shadow: inset 0 0 0 1px var(--ball-edge);
+  pointer-events: none;
+  opacity: 0;
+}
+.filter-mark.is-ready { opacity: 1; }
+.filter { padding-bottom: 0.4rem; }
+
+/* Masonry of cards, as on the old site: 3 across, 2 on tablets, 1 on phones */
+.grid { column-count: 3; column-gap: 22px; }
+@media (min-width: 110rem) { .grid { column-count: 4; } }
+@media (max-width: 74rem) { .grid { column-count: 2; } }
+@media (max-width: 44rem) { .grid { column-count: 1; } }
+
+.entry { break-inside: avoid; margin: 0 0 22px; display: block; }
+.entry[hidden] { display: none; }
+.alley[hidden] { display: none !important; }
+.card {
+  display: block;
+  padding: 18px;
+  border: 1px solid var(--tile-edge);
+  border-radius: 6px;
+  background: var(--tile);
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.25s cubic-bezier(0.3, 0.7, 0.2, 1), border-color 0.25s, box-shadow 0.25s;
+}
+.card:hover { transform: translateY(-3px); border-color: var(--tile-edge-hover); box-shadow: 0 10px 28px -14px rgb(0 0 0 / 0.55); }
+.card:focus-visible { outline: 2px solid var(--ball); outline-offset: 3px; }
+.thumb img { width: 100%; height: auto; border-radius: 2px; transition: filter 0.25s; }
+.card:hover .thumb img { filter: brightness(1.06) saturate(1.06); }
+.card-meta { display: grid; gap: 6px; padding-top: 12px; }
+.card-meta h2 { font-size: 1.375rem; line-height: 1.12; letter-spacing: -0.006em; transition: color 0.2s; }
+.card:hover .card-meta h2 { color: var(--ball); }
+.card-meta p { color: var(--muted); font-size: 0.875rem; line-height: 1.38; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.card-meta .kind { display: flex; flex-wrap: wrap; gap: 0 0.8rem; font-size: 0.8125rem; padding-top: 2px; -webkit-line-clamp: unset; }
+.card-meta .kind > * + * { padding-left: 0.8rem; border-left: 1px solid var(--line); }
+
+/* ── Post ─────────────────────────────────────────────── */
+.post-head { padding-block: clamp(2.25rem, 6vw, 4.5rem) clamp(1.5rem, 3vw, 2.25rem); }
+.post-head h1 {
+  font-size: clamp(2.25rem, 1.3rem + 3.6vw, 4.25rem);
+  line-height: 1.03;
+  letter-spacing: -0.022em;
+  font-variation-settings: 'opsz' 72;
+  max-width: 18ch;
+}
+.post-head .dek { margin-top: 1rem; font-size: clamp(1.125rem, 1rem + 0.4vw, 1.3125rem); line-height: 1.45; max-width: var(--measure); font-family: var(--serif); color: var(--ink); }
+
+.figure { margin: 0 0 clamp(2rem, 4vw, 3rem); }
+.figure + .figure { margin-top: -0.5rem; }
+.figure button.zoom {
+  all: unset;
+  display: block;
+  width: 100%;
+  cursor: zoom-in;
+}
+.figure button.zoom:focus-visible { outline: 2px solid var(--chalk); outline-offset: 4px; }
+.figure figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 1.5rem; margin-top: 0.75rem; font-size: 0.8125rem; color: var(--muted); }
+.figure figcaption a { color: var(--muted); }
+.figure figcaption a:hover { color: var(--chalk); }
+
+.prose {
+  font-family: var(--serif);
+  font-size: clamp(1.125rem, 1.05rem + 0.25vw, 1.25rem);
+  line-height: 1.62;
+  max-width: var(--measure);
+  font-variation-settings: 'opsz' 16;
+}
+.prose > * + * { margin-top: 1.05em; }
+.prose h2 { font-size: 1.6em; line-height: 1.15; margin-top: 1.9em; }
+.prose h3 { font-size: 1.25em; margin-top: 1.6em; }
+.prose blockquote { margin-inline: 0; padding-left: 1.1rem; border-left: 1px solid var(--line-strong); color: var(--muted); }
+.prose img { margin-block: 1.5em; }
+.prose ul, .prose ol { padding-left: 1.2em; }
+.prose li + li { margin-top: 0.35em; }
+.prose hr { border: 0; border-top: 1px solid var(--line); margin-block: 2.2em; }
+.prose code { font-size: 0.85em; background: var(--court-2); padding: 0.1em 0.3em; border-radius: 3px; }
+
+.post-foot { padding-block: clamp(2rem, 5vw, 3rem) clamp(3rem, 6vw, 5rem); }
+.tags { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; font-size: 0.9375rem; }
+.tags a { color: var(--muted); }
+.tags a:hover { color: var(--chalk); }
+.pager { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
+.pager a { text-decoration: none; display: block; }
+.pager span { display: block; font-size: 0.8125rem; color: var(--muted); }
+.pager strong { display: block; margin-top: 0.25rem; font: 400 1.25rem/1.2 var(--serif); color: var(--chalk); }
+.pager a:hover strong { text-decoration: underline; text-decoration-thickness: 1px; }
+.pager .next { text-align: right; grid-column: 2; }
+
+/* Zoom viewer */
+dialog.viewer {
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--scrim);
+  color: var(--ink);
+}
+dialog.viewer::backdrop { background: transparent; }
+.viewer-bar {
+  position: fixed;
+  top: 0;
+  inset-inline: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem var(--pad);
+  font-size: 0.875rem;
+  z-index: 2;
+  background: linear-gradient(var(--scrim), transparent);
+}
+.viewer-bar button, .viewer-bar a { font: inherit; color: var(--chalk); background: none; border: 0; cursor: pointer; padding: 0.35rem 0; }
+.viewer-bar .actions { display: flex; gap: 1.5rem; }
+.viewer-stage { width: 100%; height: 100%; overflow: auto; display: grid; place-items: center; padding: 3.5rem var(--pad) var(--pad); cursor: zoom-in; overscroll-behavior: contain; }
+.viewer-stage img { max-width: 100%; max-height: calc(100dvh - 5rem); width: auto; height: auto; }
+.viewer-stage.is-zoomed { place-items: start; cursor: zoom-out; }
+.viewer-stage.is-zoomed img { max-width: none; max-height: none; }
+
+/* ── About / simple pages ─────────────────────────────── */
+.page-body { padding-bottom: clamp(3rem, 6vw, 5rem); }
+
+/* ── Character ────────────────────────────────────────────
+   One orchestrated moment: on a reader's first page of a visit the mark
+   plays the point out — serve, bounce, plus-one, ball lands. Everything
+   else answers the reader: cards lift, titles turn ball yellow, the topic
+   ball hops between filters, charts grow into their post. */
+@media (prefers-reduced-motion: no-preference) {
+  /* First page of a visit: the ball comes over the net and lands in the box */
+  html.first-visit .mk-ball { animation: mk-land 0.75s 0.3s cubic-bezier(0.3, 0.6, 0.3, 1) both; }
+  .wordmark:hover .mk-ball { animation: mk-hop 0.55s cubic-bezier(0.3, 0.6, 0.3, 1); }
+}
+@keyframes mk-land {
+  0% { transform: translate(-13px, -15px) scale(0.6); opacity: 0; }
+  20% { opacity: 1; }
+  62% { transform: none; }
+  74% { transform: scale(1.3, 0.72); }
+  88% { transform: translateY(-1.5px) scale(0.95, 1.06); }
+  100% { transform: none; }
+}
+@keyframes mk-hop {
+  0% { transform: none; }
+  45% { transform: translateY(-5px); }
+  80% { transform: translateY(0) scale(1.18, 0.82); }
+  100% { transform: none; }
+}
+
+/* ── The page is half a court ─────────────────────────────
+   Header = baseline (with its centre mark), the left gutter = the doubles
+   alley, the footer = the net. On posts a ball travels along the baseline
+   as you read. */
+.site-header { position: relative; }
+.centre-mark {
+  position: absolute;
+  left: 50%;
+  bottom: -9px;
+  width: 1px;
+  height: 9px;
+  background: var(--line-strong);
+  pointer-events: none;
+}
+.rally-ball { display: none; }
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .rally-ball {
+      display: block;
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--ball-fill);
+      box-shadow: inset 0 0 0 1px var(--ball-edge);
+      animation: rally linear both;
+      animation-timeline: scroll(root);
+    }
+    @keyframes rally { from { left: 0; } to { left: calc(100% - 7px); } }
+  }
+}
+
+.net {
+  position: relative;
+  height: 16px;
+  margin-top: clamp(1rem, 3vw, 2rem);
+  border-top: 2px solid var(--net-tape);
+  background-image:
+    linear-gradient(to right, var(--line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+  background-size: 6px 6px;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 100%);
+  opacity: 0.8;
+}
+
+.figure button.zoom img { transition: filter 0.25s; }
+.figure button.zoom:hover img { filter: brightness(1.05); }
+.figure.video video { width: 100%; height: auto; display: block; border-radius: 2px; background: var(--court-2); }
+
+dialog.viewer[open] { animation: viewer-in 0.28s cubic-bezier(0.3, 0.7, 0.2, 1); }
+@keyframes viewer-in { from { opacity: 0; } to { opacity: 1; } }
+dialog.viewer[open] .viewer-stage img { animation: viewer-img 0.35s cubic-bezier(0.3, 0.7, 0.2, 1); }
+@keyframes viewer-img { from { transform: scale(0.96); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* Charts grow from the gallery into their post page (Chrome, Edge, Safari 18+) */
+@view-transition { navigation: auto; }
+::view-transition-group(*) { animation-duration: 0.38s; animation-timing-function: cubic-bezier(0.3, 0.7, 0.2, 1); }
+
+/* Back to the list */
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 0.875rem;
+  padding-block: 0.15rem;
+}
+.back svg { width: 1rem; height: 0.65rem; transition: transform 0.25s cubic-bezier(0.3, 0.7, 0.2, 1); }
+.back:hover { color: var(--ball); }
+.back:hover svg { transform: translateX(-3px); }
+.back-wrap { margin-bottom: 0.9rem; }
+
+a, .prose a { text-decoration-color: color-mix(in srgb, currentColor 45%, transparent); transition: text-decoration-color 0.2s, color 0.2s; }
+.prose a:hover, .tags a:hover, .site-footer a:hover { text-decoration-color: var(--ball); }
+
+/* ── Small screens: the alley folds into a pair of horizontal rules ── */
+@media (max-width: 46rem) {
+  .court { grid-template-columns: minmax(0, 1fr); }
+  .court::before, .court::after { display: none; }
+  .alley, .play { grid-column: 1; }
+  .play { padding-left: 0; }
+  .alley {
+    text-align: left;
+    padding: 0.7rem 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 1rem;
+    padding-top: 1rem;
+    background:
+      linear-gradient(var(--line-strong), var(--line-strong)) 0 0 / 100% 1px no-repeat,
+      linear-gradient(var(--line-strong), var(--line-strong)) 0 5px / 100% 1px no-repeat;
+  }
+  .alley > * + * { margin-top: 0; }
+  .alley:empty, .alley.desktop-only { display: none; }
+  .back-wrap { flex-basis: 100%; margin-bottom: 0.5rem; }
+  .intro { padding-top: 2rem; }
+  .post-head { padding-top: 1.25rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+  @view-transition { navigation: none; }
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+}

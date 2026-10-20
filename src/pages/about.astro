@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../site.config';
+
+const description = `${SITE.author.name} writes about tennis through data: serve and return patterns, shot placement and rally structure on the ATP tour.`;
+const profile = {
+  '@type': 'ProfilePage',
+  '@id': new URL('/about', Astro.site).href,
+  url: new URL('/about', Astro.site).href,
+  name: `About ${SITE.author.name}`,
+  mainEntity: { '@id': new URL('/about#person', Astro.site).href },
+};
+---
+
+<Base title="About" description={description} schema={[profile]}>
+  <div class="row">
+    <div class="alley"></div>
+    <header class="play post-head">
+      <h1>{SITE.author.name}</h1>
+    </header>
+  </div>
+  <div class="row">
+    <div class="alley"></div>
+    <div class="play prose page-body">
+      <!-- TODO(Matt): replace with your blurb -->
+      <p>Short bio to come.</p>
+      <p>
+        Find me on X at <a href={SITE.author.url} rel="me">@{SITE.author.x}</a>, or follow new posts by <a href="/rss.xml">RSS</a>.
+      </p>
+    </div>
+  </div>
+</Base>

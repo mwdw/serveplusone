@@ -1,0 +1,28 @@
+---
+import Base from '../../layouts/Base.astro';
+import Entry from '../../components/Entry.astro';
+import { SITE } from '../../site.config';
+import { getPosts, allTags, type Post } from '../../lib/posts';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return allTags(posts).map((t) => ({
+    params: { tag: t.slug },
+    props: { name: t.name, posts: posts.filter((p) => p.data.tags.includes(t.name)) },
+  }));
+}
+interface Props { name: string; posts: Post[]; }
+const { name, posts } = Astro.props;
+const description = `Tennis data and analysis on ${name.toLowerCase()}: ${posts.length} chart${posts.length === 1 ? '' : 's'} and notes by ${SITE.author.name}.`;
+---
+
+<Base title={name} description={description}>
+  <div class="row">
+    <div class="alley"><p>Topic</p><p>{posts.length} {posts.length === 1 ? 'post' : 'posts'}</p></div>
+    <header class="play post-head"><h1>{name}</h1></header>
+  </div>
+  <div class="row">
+    <div class="alley"></div>
+    <section class="play archive"><div class="grid">{posts.map((p) => <Entry post={p} />)}</div></section>
+  </div>
+</Base>

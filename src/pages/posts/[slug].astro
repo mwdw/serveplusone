@@ -1,0 +1,219 @@
+---
+import Base from '../../layouts/Base.astro';
+import Chart from '../../components/Chart.astro';
+import { SITE } from '../../site.config';
+import { getPosts, fmtDate, isoDate, tagSlug, hiresUrl, socialImage, readingMinutes, plainText, dims, type Post } from '../../lib/posts';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post, i) => ({
+    params: { slug: post.id },
+    props: { post, newer: posts[i - 1], older: posts[i + 1] },
+  }));
+}
+
+interface Props { post: Post; newer?: Post; older?: Post; }
+const { post, newer, older } = Astro.props;
+const { data } = post;
+
+const site = Astro.site!;
+const url = new URL(`/posts/${post.id}`, site).href;
+const images = await Promise.all(data.images.map(async (img) => ({ img, hires: await hiresUrl(img), ...dims(img) })));
+const hiresOf = new Map(images.map((i) => [i.img, i.hires]));
+const lead = data.images[0];
+const og = await socialImage(data.images[0], site, post.id);
+const absolute = (u: string) => new URL(u, site).href;
+
+const article = {
+  '@type': data.kind === 'essay' ? 'BlogPosting' : 'Article',
+  '@id': `${url}#article`,
+  headline: data.title,
+  description: data.description,
+  url,
+  mainEntityOfPage: url,
+  datePublished: data.date.toISOString(),
+  dateModified: (data.updated ?? data.date).toISOString(),
+  inLanguage: SITE.lang,
+  author: { '@id': new URL('/about#person', site).href },
+  publisher: { '@id': new URL('/about#person', site).href },
+  isPartOf: { '@id': new URL('/#website', site).href },
+  keywords: data.tags.join(', '),
+  about: [{ '@type': 'Thing', name: 'Tennis' }, ...data.tags.map((t) => ({ '@type': 'Thing', name: t }))],
+  articleBody: plainText(post.body),
+  ...(data.sample ? { temporalCoverage: data.sample } : {}),
+  image: images.map(({ img, hires, width, height }) => ({
+    '@type': 'ImageObject',
+    contentUrl: absolute(hires),
+    url: absolute(hires),
+    caption: img.caption ?? img.alt,
+    description: img.alt,
+    width,
+    height,
+    creator: { '@id': new URL('/about#person', site).href },
+    creditText: SITE.author.name,
+    copyrightNotice: `© ${data.date.getUTCFullYear()} ${SITE.author.name}`,
+  })),
+  ...(data.videos.length && og
+    ? {
+        video: data.videos.map((v) => ({
+          '@type': 'VideoObject',
+          name: `${data.title} (${v.name})`,
+          description: data.description,
+          contentUrl: absolute(v.url),
+          uploadDate: data.date.toISOString(),
+          thumbnailUrl: og.url,
+        })),
+      }
+    : {}),
+  ...(data.source ? { sameAs: [data.source.url], isBasedOn: data.source.url } : {}),
+};
+const crumbs = {
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: SITE.name, item: site.href },
+    { '@type': 'ListItem', position: 2, name: data.title, item: url },
+  ],
+};
+---
+
+<Base
+  title={data.title}
+  description={data.description}
+  type="article"
+  image={og && { ...og, alt: data.images[0]?.alt }}
+  published={data.date}
+  modified={data.updated}
+  tags={data.tags}
+  schema={[article, crumbs]}
+  progress
+>
+  <div class="row">
+    <div class="alley">
+      <p class="back-wrap"><a class="back" href="/" data-back>
+        <svg viewBox="0 0 16 10" aria-hidden="true"><path d="M15 5H2M5.5 1.5 2 5l3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.4" /></svg>
+        All posts
+      </a></p>
+      <p><time datetime={isoDate(data.date)}>{fmtDate(data.date)}</time></p>
+      {data.kind === 'essay' && <p>{readingMinutes(post.body)} min read</p>}
+      {data.sample && <p>{data.sample}</p>}
+    </div>
+    <header class="play post-head">
+      <h1>{data.title}</h1>
+      <p class="dek">{data.description}</p>
+    </header>
+  </div>
+
+  {post.blocks.map((block) => (
+    <div class="row">
+      <div class="alley"></div>
+      {block.type === 'text' ? (
+        <div class="play prose" set:html={block.html} />
+      ) : block.item.kind === 'image' ? (
+        <figure class="play figure">
+          <button
+            class="zoom"
+            type="button"
+            data-zoom={hiresOf.get(block.item.image)}
+            data-alt={block.item.image.alt}
+            aria-label={`Enlarge chart: ${block.item.image.alt}`}
+            style={block.item.image === lead ? `view-transition-name: chart-${post.id}` : undefined}
+          >
+            <Chart img={block.item.image} sizes="(min-width: 100rem) 86rem, (min-width: 46rem) 88vw, 100vw" priority={block.item.image === lead} />
+          </button>
+          <figcaption>
+            <span>{block.item.image.caption ?? ''}</span>
+            <a href={hiresOf.get(block.item.image)} target="_blank" rel="noopener">Full resolution</a>
+          </figcaption>
+        </figure>
+      ) : (
+        <figure class="play figure video">
+          <video
+            controls
+            playsinline
+            preload="metadata"
+            autoplay={data.autoplay}
+            muted={data.autoplay}
+            loop={data.autoplay}
+          >
+            <source src={block.item.video.url} type={block.item.video.mime} />
+            <a href={block.item.video.url}>Download the video</a>
+          </video>
+        </figure>
+      )}
+    </div>
+  ))}
+
+  <div class="row">
+    <div class="alley">
+      {data.source && <p><a href={data.source.url} rel="noopener">First posted on X</a></p>}
+    </div>
+    <footer class="play post-foot">
+      {data.tags.length > 0 && (
+        <nav class="tags" aria-label="Topics">
+          {data.tags.map((t) => <a href={`/topics/${tagSlug(t)}`} rel="tag">{t}</a>)}
+        </nav>
+      )}
+      {(newer || older) && (
+        <nav class="pager" aria-label="More posts">
+          {older && <a class="prev" href={`/posts/${older.id}`} rel="prev"><span>Previous</span><strong>{older.data.title}</strong></a>}
+          {newer && <a class="next" href={`/posts/${newer.id}`} rel="next"><span>Next</span><strong>{newer.data.title}</strong></a>}
+        </nav>
+      )}
+    </footer>
+  </div>
+
+  <dialog class="viewer" aria-label="Chart viewer">
+    <div class="viewer-bar">
+      <span>Click the chart to zoom to full size</span>
+      <span class="actions">
+        <a data-viewer-open href="#" target="_blank" rel="noopener">Open file</a>
+        <button type="button" data-viewer-close>Close</button>
+      </span>
+    </div>
+    <div class="viewer-stage" data-viewer-stage><img alt="" data-viewer-img /></div>
+  </dialog>
+
+  <script>
+    const dialog = document.querySelector<HTMLDialogElement>('dialog.viewer')!;
+    const stage = dialog.querySelector<HTMLElement>('[data-viewer-stage]')!;
+    const img = dialog.querySelector<HTMLImageElement>('[data-viewer-img]')!;
+    const open = dialog.querySelector<HTMLAnchorElement>('[data-viewer-open]')!;
+    let opener: HTMLElement | null = null;
+
+    document.querySelectorAll<HTMLButtonElement>('[data-zoom]').forEach((btn) =>
+      btn.addEventListener('click', () => {
+        opener = btn;
+        img.src = btn.dataset.zoom!;
+        img.alt = btn.dataset.alt ?? '';
+        open.href = btn.dataset.zoom!;
+        stage.classList.remove('is-zoomed');
+        dialog.showModal();
+      }),
+    );
+    stage.addEventListener('click', (e) => {
+      const zoomed = stage.classList.toggle('is-zoomed');
+      if (zoomed) {
+        // Keep the clicked point under the cursor after zooming
+        const r = img.getBoundingClientRect();
+        const fx = (e.clientX - r.left) / r.width, fy = (e.clientY - r.top) / r.height;
+        requestAnimationFrame(() => {
+          stage.scrollLeft = img.offsetWidth * fx - stage.clientWidth / 2;
+          stage.scrollTop = img.offsetHeight * fy - stage.clientHeight / 2;
+        });
+      }
+    });
+    dialog.querySelector('[data-viewer-close]')!.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('close', () => opener?.focus());
+
+    // Back: if the reader came from the list, return to exactly where they were (scroll + topic filter).
+    document.querySelector<HTMLAnchorElement>('[data-back]')?.addEventListener('click', (e) => {
+      try {
+        const ref = document.referrer ? new URL(document.referrer) : null;
+        if (ref && ref.origin === location.origin && (ref.pathname === '/' || ref.pathname.startsWith('/topics/')) && history.length > 1) {
+          e.preventDefault();
+          history.back();
+        }
+      } catch {}
+    });
+  </script>
+</Base>
