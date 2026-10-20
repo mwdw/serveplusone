@@ -1,0 +1,25 @@
+---
+// Old-site links (mw-tennis-data used /post.html?id=<id>) forward to the new posts.
+// Cloudflare's redirect rules ignore the ?id= part, so this tiny page does it instead.
+const MAP: Record<string, string> = {
+  'sine-of-a-great-serve': '/posts/sine-of-a-great-serve',
+  'out-wide-out-wider': '/posts/out-wide-out-wider',
+  'sinner-alcaraz-tax': '/posts/the-sinner-and-alcaraz-tax',
+  'alcaraz-monte-carlo-rally-contact': '/posts/alcaraz-rally-contact',
+  'return-contact-sinner-alcaraz': '/posts/return-contact-point',
+};
+---
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <title>Serve Plus One</title>
+    <script is:inline define:vars={{ MAP }}>
+      var id = new URLSearchParams(location.search).get('id');
+      location.replace((id && MAP[id]) || '/');
+    </script>
+    <noscript><meta http-equiv="refresh" content="0; url=/" /></noscript>
+  </head>
+  <body><a href="/">Serve Plus One</a></body>
+</html>
