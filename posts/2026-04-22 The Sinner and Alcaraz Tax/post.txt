@@ -1,0 +1,52 @@
+The Sinner & Alcaraz Tax
+
+Sinner and Alcaraz tax the top 20 the way they tax everyone else. And nobody can tax them back.
+
+Much has been made of how much further ahead of the pack Alcaraz and Sinner are in men's tennis. The simplest tell is the rankings:
+
+2-rankings.jpg
+
+But it's instructive to look at how that gap has opened up in terms of performance.
+
+Here's what happens when the current top 20 ranked players (excluding Sinner and Alcaraz) play each other when hitting a 1st serve, next to what happens when those same players meet Sinner or Alcaraz:
+
+1-first-serve-tax.jpg
+
+- 6.1% decrease in aces or unreturned serves
+- 2% fewer forehand +1 opportunities
+- 6.5% decrease in points won when hitting a forehand after their serve
+- 8.4%(!) decrease in points won when hitting a backhand after their serve
+- and overall a 7.5% decrease in 1st serve points won
+
+In a sport where percentage points of performance can make or break wins and losses, these are huge dents being made. And these dents aren't being made against just anybody, they're against the next 18 best tennis players on earth, the elite.
+
+Here's what happens on 2nd serve:
+
+3-second-serve-tax.jpg
+
+- On average, any 2nd serve that comes back becomes a losing play
+- 55% of the time when a top 20 player hits a forehand after a 2nd serve vs Alcaraz or Sinner they lose the point
+- 60% of the time when a top 20 player hits a backhand after a 2nd serve vs Alcaraz or Sinner they lose the point
+- Backhand +1s become more common than forehands against Sinner and Alcaraz when hitting 2nd serves
+
+Alcaraz and Sinner really are just much better than the field, on 1st serve return especially:
+
+4-first-serve-return.jpg
+
+Perhaps most extraordinarily of all, Sinner and Alcaraz have pushed so far ahead of the chasing pack that neither of them, when playing even half-decent, seem to notice much of a difference between a top 100 player and a top 20 player. Sinner and Alcaraz actually perform slightly better against top 20 players on 1st serve than against players ranked 21–100:
+
+5-top-20-vs-21-100.jpg
+
+Sinner and Alcaraz tax the top 20 the way they tax everyone else. And nobody can tax them back. From the altitude those two players have reached, everything below them (apart from Djokovic on a good day) reads flat. Rank 8 and rank 41 may as well sit at the same elevation.
+
+Type: essay
+Tags: Forehand vs backhand, Rankings
+Data: 2025–2026, all surfaces. Cohort = top 20 as of April 2026, minus Sinner and Alcaraz
+Alt: Two flow charts of first-serve points for top-20 servers in 2025–26: against each other (72.4% won) and against Sinner or Alcaraz (64.8% won). Against the pair, fewer first serves go unreturned (32% against 38%), and the server's +1 shot wins less often on both the forehand (6.5 points lower) and the backhand (8.4 points lower).
+Alt 2: Bar chart of ATP ranking points for the top 20 on 22 April 2026. Sinner has 13,350 and Alcaraz 12,960; Zverev is third with 5,255, and ranks 3 to 8 combined hold 25,850 points, fewer than Sinner and Alcaraz's 26,310.
+Alt 3: Two flow charts of second-serve points for top-20 servers: against each other they win 51.5%, against Sinner or Alcaraz 46.1%. Against the pair, backhand +1s rise to 51% of returned second serves and win only 40% of the time, and forehand +1s win 45%.
+Alt 4: Scatter plot of top-20 players' first-serve return: returns in (56 to 70%) against return points won (24 to 36%). Sinner and Alcaraz sit top right at about 35% won and 67 to 69% in, ahead of Cerundolo and Medvedev; Shelton is lowest at 24%.
+Alt 5: Two flow charts of Sinner and Alcaraz's first-serve points against players ranked 21–100 (75.5% won) and against the rest of the top 20 (76.6% won). Against the top 20, their unreturned rate is unchanged at 38% and their backhand +1 win rate is 9.4 points higher.
+Caption 4: 2025–2026, all surfaces
+Caption 5: Sinner carries more of this effect due to his better serve (1.2% higher 1st serve win rate vs top 20 players than 21–100 players, compared to just 0.2% better for Alcaraz) but neither are dented and both are incredibly impressive. Sinner's backhand +1 performance against supposedly stronger opposition is almost comically good. Better players can force Sinner to hit more backhands after his serve, but it doesn't do them any good at all such is the strength of that shot.
+X: https://x.com/mattracquet/status/2047000434506707360

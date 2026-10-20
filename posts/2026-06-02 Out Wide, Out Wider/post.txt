@@ -1,8 +1,0 @@
-Out Wide, Out Wider
-
-Return contact points on wide serves, split by server hand and service box.
-
-A court-position view of how far wide serves pull returners outside the singles line.
-
-Data: Top 10, 2025–2026 first-serve returns
-Alt: Court diagram of where top-10 players make return contact on wide first serves in 2025–26, split by service box and by the server's hand. On the ad side they make contact 2.63m outside the singles line against left-handers and 1.60m against right-handers; on the deuce side it is 1.34m against left-handers and 2.30m against right-handers.

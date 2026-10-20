@@ -61,7 +61,7 @@
 
 [[redirects]]
   from = "/post.html"
-  to = "/posts/first-serve-compass"
+  to = "/"
   query = { id = "first-serve-compass" }
   status = 301
   force = true

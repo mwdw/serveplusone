@@ -1,8 +1,9 @@
 Return Contact Point
 
-First-serve return contact points for Sinner and Alcaraz across hard and clay.
+A nice way to look at differences in hard and clay court strategy is return positions.
 
-A surface-split map of where Sinner and Alcaraz make contact against first serves.
+Both Alcaraz and Sinner move back a lot on clay (Sinner 1.2m further behind the baseline than on hard, Alcaraz 1.3m). But Alcaraz has a bimodal distribution on clay, taking it early and deep evenly.
 
 Data: ATP matches 2025–2026, including Monte Carlo
 Alt: Court maps of where Sinner and Alcaraz make contact when returning first serves, split by hard court and clay and coloured by point won, lost, return winner or error. Sinner averages 1.63m behind the baseline on hard and 2.78m on clay; Alcaraz averages 1.96m on hard and 3.22m on clay, with a second, deeper cluster around 5m on clay.
+X: https://x.com/mattracquet/status/2042610941959782712

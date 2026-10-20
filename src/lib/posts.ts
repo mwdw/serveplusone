@@ -94,16 +94,19 @@ function parse(folder: string, raw: string, imgs: [string, ImageMetadata][], vid
 
   const name = folder.replace(/^\d{4}-\d{2}-\d{2}\s*[-_ ]?\s*/, '') || title;
   const plainSummary = summary.replace(/[*_`#>]/g, '').replace(/\[([^\]]+)\]\([^)]*\)/g, '$1');
-  const manual = (settings.tags ?? settings.tag ?? settings.topics ?? settings.topic ?? '').split(',').map((t) => canonical(t.trim())).filter(Boolean);
+  const manual = (settings.tags ?? settings.tag ?? settings.topics ?? settings.topic ?? '').split(',').map((t) => t.trim()).filter(Boolean);
+  // "-Tag" on the Tags line removes a tag the automatic tagger added.
+  const remove = new Set(manual.filter((t) => t.startsWith('-')).map((t) => canonical(t.slice(1).trim())));
+  const kept = manual.filter((t) => !t.startsWith('-')).map(canonical);
   const alts = Object.entries(settings).filter(([k]) => /^(alt|caption)\d*$/.test(k)).map(([, v]) => v).join('\n');
   const auto = settings.autotags && !yes(settings.autotags)
     ? []
     : autoTags({
-        headline: [title, summary, manual.join(', ')].join('\n'),
+        headline: [title, summary, kept.join(', ')].join('\n'),
         everything: [title, summary, body, alts, settings.data ?? ''].join('\n'),
         story: [title, summary, body].join('\n'),
       });
-  const tags = tidy([...new Set([...manual, ...auto])]);
+  const tags = tidy([...new Set([...kept, ...auto])]).filter((t) => !remove.has(t));
   const link = settings.x ?? settings.link;
 
   const postImages: PostImage[] = imgs.map(([file, src], i) => ({

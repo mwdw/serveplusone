@@ -22,7 +22,9 @@ THE OPTIONAL LINES AT THE BOTTOM OF post.txt
            list in src/lib/tags.ts: Serve +1, Serve speed, Return position,
            Rally length, Lefties, tournaments, players named in the title or
            summary, and so on. Add a Tags line only for something the text doesn't
-           say. "Auto tags: no" switches automatic tagging off for a post.
+           say. To remove a wrong automatic tag, put a minus in front of it:
+           "Tags: Sinner, -ATP Finals". "Auto tags: no" switches automatic
+           tagging off for a post.
    Data:   what the data covers, shown next to the chart.
    Alt:    a description of what the chart shows (Alt 2:, Alt 3: for further
            images). Worth writing properly: it feeds the automatic tags, Google

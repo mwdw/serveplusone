@@ -1,0 +1,43 @@
+Alcaraz has a serve problem
+
+Possibly a crazy thing to be writing about the current world No.1 and recent Australian Open champion. But margins are fine in tennis and his biggest rival has some hard court gifts that can make even small problems loom large.
+
+Let's take a look at Alcaraz's 1st serve placement over the last year on hard courts (ATP events).
+
+*I'm isolating just the AD side here because upwards of 75% of break points happen on that side.*
+
+1-alcaraz-break-points.jpg
+
+You can see Alcaraz has a fairly even placement (between wide and T) on his average 1st serve points on the AD side (left) over the last year. And a high win rate (>70%). But on break points (right) he becomes much more predictable and wins fewer points (59% win rate out wide), especially recently. He seems to use a mixed wide/body serve as a bit of a crutch, perhaps aiming not to have to hit a 2nd serve. But ends up landing more than 70% of his 1st serves on the AD side, on break points, into this relatively safe wide/body region. This means that the returner isn't having to guess very often.
+
+That serve can work. It can even be excellent. Alcaraz can go through purple patches of hitting brilliantly placed wide 1st serve bombs. And he can sometimes jam up the returner with effective body serves. But he's also opening himself up to being easily read by opponents. You can see this manifest in what was a confusingly slow and safe 1st serve, down break point, in his loss against Korda yesterday ([watch the point here](https://x.com/ttmedia222/status/2036123080972517499)).
+
+*I had to go back and check if this was actually a 1st serve given its speed.* It was. Alcaraz gets no serve advantage at all from this delivery, in fact he's classified as being in neutral/defence from his 2nd ball. This would have been a more common 1st serve in the early 2010s, but looks jarringly conservative for 2026.
+
+For the harsh comparison, here's Alcaraz's main rival Sinner, on the same AD side:
+
+2-sinner-break-points.jpg
+
+Not only does Sinner land his 1st serves closer to the lines but there's not much difference in placement between normal points and break points. His opponents have to guess more often. And Sinner wins more often. Body serves are a rarity.
+
+This (below) is the data I posted a few weeks ago showing 1st serve speed vs 1st serve accuracy (accuracy is distance away from the side line and T, excluding body serves). As you can see, the relative short-arses of the men's elite (De Minaur, Alcaraz, Musetti, Ruud) all seem to be making an understandable tradeoff choice of power over accuracy. This is simple trigonometry for these players compared to taller guys like Sinner, Fritz, Mensik etc. It's not impossible for shorter guys to hit both accurate and fast 1st serves, but it is harder:
+
+3-serve-speed-vs-accuracy.png
+
+I do wonder though whether Alcaraz could increasingly try to take a page out of Djokovic's book. Djokovic is a bit taller than Alcaraz but also hits such accurate spots on serve that he doesn't need to average more than 118–119mph (slow-ish for a modern elite ATP player) to be devastatingly effective. Djokovic's unreturned 1st serve rate is 40% over the last 52 weeks compared to Alcaraz's 36%. Sinner's unreturned rate is 44%. But the +1 advantage (the shot after the serve if the return comes back) from accurate spot serving isn't fully quantified in the unreturned serve stat. And Alcaraz with his generational forehand would clearly benefit from more juicy +1 opportunities rather than returns pinging back to his shoelaces à la Korda.
+
+This is all quite different on clay, both because Alcaraz's excellent kick serve out wide on the AD side is more effective on the more friction-heavy surface, and because Alcaraz is less likely to be rushed from a good return on clay even if he does hit a safer 1st serve. It's also different on grass because the ball bounces lower, which makes Alcaraz's flat serves more effective. In general this is also an issue which can be covered up entirely by Alcaraz's outrageously good non-serve tennis, i.e. he's so good after the serve that it often doesn't even matter what type of serve he hits. This is the case against much of the field.
+
+There's also a meta discussion here around there being no more slow hard courts at the top of men's tennis anymore after Indian Wells was sped up this year. That was the last remaining slow hard court at Masters, Slam and ATP Finals level. And considering previous editions of Indian Wells arguably suited Alcaraz better than any other hard court on tour, it's interesting career timing that the tour has decided to make these conditions largely extinct.
+
+Alcaraz remains world No.1 and the most recent major champion (at a medium-fast Australian Open no less). Any tweaks he makes will only need to be minor at best considering how great he already is. But there's a chance he may benefit from bucking the men's tennis trend of hitting everything as hard as possible as early as possible. So far in his career Alcaraz has thrived with a 6ft (5ft 11) frame in a land of relative giants. But for him to be great at least in part because of, rather than in spite of, his serve, may take a bit more work. A bit of spot serving may go a long way.
+
+Type: essay
+Tags: First serve, Sinner, Djokovic, Court speed, -ATP Finals
+Data: ATP events on hard courts, last 52 weeks
+Alt: Two court diagrams of Alcaraz's ad-side first serves on hard courts over the last 52 weeks. On all points (n=667) he goes 41% wide, 15% body and 44% T, winning 72 to 74% out wide and down the T. On break points (n=56) 71% go wide or body (48% wide, 23% body, 29% T) and he wins only 59% of the wide serves.
+Alt 2: The same diagrams for Sinner. On all ad-side points (n=635) he goes 52% wide, 4% body and 44% T, winning 83% and 81%. On break points (n=45) the split barely changes (56% wide, 4% body, 40% T) and he wins 72% wide and 89% down the T.
+Alt 3: Scatter plot of the ATP top 20 by average first-serve speed against first-serve accuracy, coloured by height. Shorter players such as De Minaur, Alcaraz, Musetti and Ruud sit in the fast-but-less-accurate region; Djokovic is the most accurate at about 50cm at 119 mph.
+Caption 1: Sample sizes on break points aren't huge but they're OK and pretty representative of wider time frames.
+Caption 3: More accurate is lower on this graph.
+X: https://x.com/mattracquet/status/2036142997298094197
