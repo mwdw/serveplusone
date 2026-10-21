@@ -95,9 +95,14 @@ const listSchema = {
     // Masonry that reads across: deal each card (newest first) to the shortest column.
     const grid = document.querySelector<HTMLElement>('.grid');
     let cols: HTMLElement[] = [];
+    // Only re-deal when something actually changes: the filter, or the number of
+    // columns. Phones fire "resize" whenever the address bar shows or hides while
+    // scrolling; re-dealing then would empty the grid for a moment and throw the
+    // page back to the top.
+    const colCount = () => (grid ? Math.max(1, parseInt(getComputedStyle(grid).getPropertyValue('--cols')) || 1) : 1);
     function deal() {
       if (!grid) return;
-      const n = Math.max(1, parseInt(getComputedStyle(grid).getPropertyValue('--cols')) || 1);
+      const n = colCount();
       if (cols.length !== n) {
         cols.forEach((c) => c.remove());
         cols = Array.from({ length: n }, () => Object.assign(document.createElement('div'), { className: 'col' }));
@@ -106,10 +111,9 @@ const listSchema = {
       }
       const h = cols.map(() => 0);
       for (const e of entries) {
-        if (e.hidden) { cols[0].append(e); continue; }
-        const i = h.indexOf(Math.min(...h));
+        const i = e.hidden ? 0 : h.indexOf(Math.min(...h));
         cols[i].append(e);
-        h[i] += e.offsetHeight + 22;
+        if (!e.hidden) h[i] += e.offsetHeight + 22;
       }
     }
 
@@ -177,7 +181,7 @@ const listSchema = {
     deal();
     if (initial) apply(initial, false);
     moveBall(false);
-    addEventListener('resize', () => { deal(); moveBall(false); });
-    document.fonts?.ready.then(() => { deal(); moveBall(false); });
+    addEventListener('resize', () => { if (colCount() !== cols.length) deal(); moveBall(false); });
+    document.fonts?.ready.then(() => { if (cols.length > 1) deal(); moveBall(false); });
   </script>
 </Base>
