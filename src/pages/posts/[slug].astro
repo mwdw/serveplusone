@@ -122,7 +122,7 @@ const crumbs = {
                   <span>@{q.handle}</span>
                 </p>
                 {q.text && <p class="what">{q.text}</p>}
-                <a href={q.url}>{q.date ? fmtDate(q.date) : 'Watch on X'}</a>
+                <a href={q.url}>Watch on X →</a>
               </blockquote>
             </figure>
           ) : (
@@ -247,7 +247,7 @@ const crumbs = {
   </script>
   {[...quotes.values()].some((q) => q.hasVideo) && (
     <script is:inline>
-      // Load X's embed script only when a video post is near the screen, matching the site's theme.
+      // Load X's embed script (only on posts that quote a video), matching the site's theme.
       (() => {
         const embeds = document.querySelectorAll('blockquote.twitter-tweet');
         if (!embeds.length) return;
@@ -255,14 +255,8 @@ const crumbs = {
           ? document.documentElement.dataset.theme === 'dark'
           : !matchMedia('(prefers-color-scheme: light)').matches;
         embeds.forEach((b) => b.setAttribute('data-theme', dark ? 'dark' : 'light'));
-        const load = () => {
-          if (document.getElementById('x-widgets')) return;
-          const s = Object.assign(document.createElement('script'), { id: 'x-widgets', src: 'https://platform.twitter.com/widgets.js', async: true, charset: 'utf-8' });
-          document.body.append(s);
-        };
-        if (!('IntersectionObserver' in window)) return load();
-        const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io.disconnect(); load(); } }, { rootMargin: '800px 0px' });
-        embeds.forEach((b) => io.observe(b));
+        const s = Object.assign(document.createElement('script'), { id: 'x-widgets', src: 'https://platform.twitter.com/widgets.js', async: true, charset: 'utf-8' });
+        document.body.append(s);
       })();
     </script>
   )}
