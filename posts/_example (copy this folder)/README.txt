@@ -16,6 +16,14 @@ HOW TO ADD A POST
 
 This example folder is ignored by the site because its name starts with _.
 
+QUOTING SOMEONE ELSE'S POST ON X
+   Paste the link to the post on its own line in the writing, where you want
+   it to appear, e.g.
+       https://x.com/someone/status/1234567890
+   It shows as a small card with their name, the date, what they wrote and a
+   link to the original. (If X can't be reached when the site updates, it
+   still shows as a link.)
+
 THE OPTIONAL LINES AT THE BOTTOM OF post.txt
    Tags:   usually not needed. Posts are tagged automatically from what they
            say (title, summary, writing and the Alt descriptions), using the topic

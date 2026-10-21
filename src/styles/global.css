@@ -513,6 +513,16 @@ dialog.viewer[open] .viewer-stage img { animation: viewer-img 0.35s cubic-bezier
 a, .prose a { text-decoration-color: color-mix(in srgb, currentColor 45%, transparent); transition: text-decoration-color 0.2s, color 0.2s; }
 .prose a:hover, .tags a:hover, .site-footer a:hover { text-decoration-color: var(--ball); }
 
+/* Quoted X posts */
+.quote-card { max-width: var(--post); box-sizing: content-box; margin: clamp(0.75rem, 1.5vw, 1.25rem) 0 clamp(1.25rem, 2.5vw, 1.75rem); }
+.quote-card blockquote { margin: 0; padding: 1rem 1.15rem 0.9rem; background: var(--court-2); border-left: 2px solid var(--ball); border-radius: 0 6px 6px 0; }
+.quote-card .who { display: flex; flex-wrap: wrap; gap: 0.15rem 0.5rem; align-items: baseline; font-size: 0.875rem; color: var(--muted); }
+.quote-card .who strong { color: var(--chalk); font-weight: 600; }
+.quote-card .what { margin-top: 0.45rem; font-size: 0.975rem; line-height: 1.5; color: var(--ink); white-space: pre-line; }
+.quote-card figcaption { margin-top: 0.55rem; font-size: 0.8125rem; }
+.quote-card figcaption a { color: var(--muted); }
+.quote-card figcaption a:hover { color: var(--chalk); }
+
 /* About portrait */
 .portrait { width: clamp(7rem, 12vw, 10rem); height: auto; aspect-ratio: 1; border-radius: 50%; object-fit: cover; margin-top: clamp(1.25rem, 3vw, 2rem); box-shadow: 0 0 0 1px var(--line); }
 

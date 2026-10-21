@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import Chart from '../../components/Chart.astro';
 import { SITE } from '../../site.config';
+import { getQuote, type Quote } from '../../lib/quotes';
 import { getPosts, fmtDate, isoDate, tagSlug, hiresUrl, socialImage, readingMinutes, plainText, dims, type Post } from '../../lib/posts';
 
 export async function getStaticPaths() {
@@ -23,6 +24,8 @@ const hiresOf = new Map(images.map((i) => [i.img, i.hires]));
 const lead = data.images[0];
 const og = await socialImage(data.images[0], site, post.id);
 const absolute = (u: string) => new URL(u, site).href;
+const quotes = new Map<string, Quote>();
+for (const b of post.blocks) if (b.type === 'quote') quotes.set(b.url, await getQuote(b.url));
 
 const article = {
   '@type': data.kind === 'essay' ? 'BlogPosting' : 'Article',
@@ -106,6 +109,24 @@ const crumbs = {
       <div class="alley"></div>
       {block.type === 'text' ? (
         <div class="play prose col" set:html={block.html} />
+      ) : block.type === 'quote' ? (
+        (() => {
+          const q = quotes.get(block.url)!;
+          return (
+            <figure class="play quote-card">
+              <blockquote cite={q.url}>
+                <p class="who">
+                  {q.name && <strong>{q.name}</strong>}
+                  <span>@{q.handle}{q.date && <> · <time datetime={isoDate(q.date)}>{fmtDate(q.date)}</time></>}</span>
+                </p>
+                {q.text && <p class="what">{q.text}</p>}
+              </blockquote>
+              <figcaption>
+                <a href={q.url} rel="noopener">{q.hasVideo ? 'Watch on X' : q.hasImage ? 'See the post and image on X' : 'View on X'} →</a>
+              </figcaption>
+            </figure>
+          );
+        })()
       ) : block.item.kind === 'image' ? (
         <figure class="play figure">
           <button

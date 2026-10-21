@@ -13,6 +13,7 @@
  *
  * Folders starting with _ are ignored.
  */
+import { QUOTE_LINE } from './quotes';
 import { getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import { marked } from 'marked';
@@ -34,7 +35,7 @@ export interface PostVideo {
 }
 export type MediaItem = { kind: 'image'; name: string; image: PostImage } | { kind: 'video'; name: string; video: PostVideo };
 /** What a post page renders, in order: media blocks and text blocks. */
-export type Block = { type: 'media'; item: MediaItem } | { type: 'text'; html: string };
+export type Block = { type: 'media'; item: MediaItem } | { type: 'text'; html: string } | { type: 'quote'; url: string };
 
 export interface Post {
   id: string;
@@ -145,6 +146,7 @@ function parse(folder: string, raw: string, imgs: [string, ImageMetadata][], vid
   for (const line of body.split('\n')) {
     const ref = byName.get(line.trim().replace(/^\[\[|\]\]$/g, '').toLowerCase());
     if (ref && !placed.has(ref)) { flush(); placed.add(ref); textBlocks.push({ type: 'media', item: ref }); }
+    else if (QUOTE_LINE.test(line.trim())) { flush(); textBlocks.push({ type: 'quote', url: line.trim() }); }
     else buf.push(line);
   }
   flush();
