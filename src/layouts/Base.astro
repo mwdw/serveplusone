@@ -125,6 +125,11 @@ const current = (href: string) => (href === '/' ? path === '/' || path === '/ind
         <nav class="nav" aria-label="Primary">
           <a href="/" aria-current={current('/') ?? current('/posts') ?? current('/topics')}>Posts</a>
           <a href="/about" aria-current={current('/about')}>About</a>
+          <button class="theme-toggle" type="button" data-theme-toggle>
+            <svg class="ico ico-sun" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6" /><path d="M10 1.8v2.4M10 15.8v2.4M1.8 10h2.4M15.8 10h2.4M4.2 4.2l1.7 1.7M14.1 14.1l1.7 1.7M4.2 15.8l1.7-1.7M14.1 5.9l1.7-1.7" /></svg>
+            <svg class="ico ico-lights" viewBox="0 0 20 20" aria-hidden="true"><rect x="4" y="1.6" width="12" height="6.4" rx="1.2" /><path class="lamps" d="M7 3.9h0M10 3.9h0M13 3.9h0M7 6h0M10 6h0M13 6h0" /><path d="M10 8v10.2M6.8 18.2h6.4" /></svg>
+            <span class="tt-label">Night session</span>
+          </button>
         </nav>
       </header>
       <main id="main" class="court">
@@ -136,7 +141,6 @@ const current = (href: string) => (href === '/' ? path === '/' || path === '/ind
         <nav aria-label="Footer">
           <a href={SITE.author.url} rel="me">X</a>
           <a href="/rss.xml">RSS</a>
-          <button class="theme-toggle" type="button" data-theme-toggle>Day session</button>
         </nav>
       </footer>
     </div>
@@ -148,9 +152,14 @@ const current = (href: string) => (href === '/' ? path === '/' || path === '/ind
         const sysDark = matchMedia('(prefers-color-scheme: dark)');
         const isDark = () => (root.dataset.theme ? root.dataset.theme === 'dark' : sysDark.matches);
         // Tennis names for the themes: day session (light) and night session (dark).
+        // The button shows where it will take you: the sun for a day session, the
+        // floodlights for a night session.
+        const text = btn.querySelector('.tt-label');
         const label = () => {
-          btn.textContent = isDark() ? 'Day session' : 'Night session';
-          btn.setAttribute('aria-label', isDark() ? 'Switch to light theme' : 'Switch to dark theme');
+          const dark = isDark();
+          text.textContent = dark ? 'Day session' : 'Night session';
+          btn.dataset.next = dark ? 'day' : 'night';
+          btn.setAttribute('aria-label', dark ? 'Day session: switch to the light theme' : 'Night session: switch to the dark theme');
         };
         label();
         sysDark.addEventListener('change', label);

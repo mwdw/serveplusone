@@ -205,17 +205,28 @@ p { margin: 0; text-wrap: pretty; }
 .site-footer nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
 .site-footer a { color: var(--muted); }
 .site-footer a:hover { color: var(--chalk); }
+.nav { align-items: center; }
 .theme-toggle {
   font: inherit;
   color: var(--muted);
   background: none;
   border: 0;
-  padding: 0;
+  padding: 0.4rem 0;
   cursor: pointer;
-  text-decoration: underline;
-  text-underline-offset: 0.18em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
 }
 .theme-toggle:hover { color: var(--chalk); }
+.theme-toggle .ico { width: 1.05rem; height: 1.05rem; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; flex: none; transition: transform 0.4s cubic-bezier(0.3, 0.7, 0.2, 1); }
+.theme-toggle .ico .lamps { stroke-width: 1.9; }
+.theme-toggle[data-next='day'] .ico-lights, .theme-toggle[data-next='night'] .ico-sun, .theme-toggle:not([data-next]) .ico-sun { display: none; }
+.theme-toggle:hover .ico-sun { transform: rotate(45deg); }
+.theme-toggle:hover .ico-lights { transform: translateY(-1px); }
+.theme-toggle:focus-visible { outline: 2px solid var(--chalk); outline-offset: 3px; border-radius: 2px; }
+/* On phones the icon alone keeps the header to one line */
+@media (max-width: 34rem) { .theme-toggle .tt-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } }
 
 /* ── Home ─────────────────────────────────────────────── */
 .intro { padding-block: clamp(2rem, 4.5vw, 3.5rem) 0; }
