@@ -1,0 +1,29 @@
+How close to the line
+
+Serve accuracy and spot serving have rightly gotten more attention this year but you can go deeper by looking individually at the four main spots (AD Wide, AD T, Deuce T, Deuce Wide) players are aiming for. There's a lot of information here but a few high level things:
+
+1-ad-box.jpg
+
+2-deuce-box.jpg
+
+3-free-points.jpg
+
+4-bending-it-wide.jpg
+
+1. Sinner is lethally accurate in all 4 spots. His four spots land within 5 cm of each other (46–51 cm from the line) and he's at or close to the top in all four zones
+2. Fritz's accuracy on T serves on the AD side is incredible at 40cm avg distance from the T line (I've only seen Nakashima post tighter numbers at 39.7cm in same spot)
+3. This is a perfect illustration of why Jodar has significant room for improvement as he matures, especially because the rest of his game is already great and serves are a closed skill and more improvable. As far as precedent for serve optimisation goes, for a player his height, he should have room to be both more aggressive, accurate and keep landing a high % of serves in play. A Jodar with a meaningfully higher number of free points on serve should scare the top of the game
+4. Alcaraz gets shockingly few free points on his wide serve on the AD side (mentioned before), just 27.7% are unreturned in that spot (for context his biggest rival Sinner is just under 50%). He's 2nd last overall for unreturned just in front of De Minaur. He still wins a high % of 1st serve points because his +1 and rest of his game are so elite, but in certain matchups this is a remaining vulnerability (especially because that serve will face more break points than the deuce side)
+5. The top 5 guys for placement, power, and risk (first serve in %) are all 6ft3-6ft6. Their height and technique mean they often don't have to trade-off much between power, accuracy, and serve in%. In comparison a player like Tiafoe has to gamble more, his best serve unreturned wise (47%) is also his riskiest (just 44% in)
+6. Shelton's lefty T serve on the AD side is essentially unplayable (62% unreturned, 137mph avg speed, >60% in). Part of this is a second order effect of the threat of his lefty slider out wide on the AD side: you'll see returners having to hedge their positioning a bit wider than usual, leaving space open for this T serve instead. He goes 50% wide and 40% T (rest body) on these serves so opponents are kept guessing
+7. The 4th image measures 'deviation' which is showing how much the ball moves from a straight path on 1st serves. This measures the 'swing' in serves basically, so a higher degree out wide on the deuce side would be a slice serve swinging away from the returner, away from the court. Alcaraz and Fritz both have really swingy deuce wide serves, and this is part of why Alcaraz's best performing serve by far unreturned wise (44%) is that wide serve on the deuce side
+
+Summary: Serve accuracy and spot serving have rightly gotten more attention this year, but you can go deeper by looking individually at the four main spots players are aiming for.
+Type: essay
+Tags: First serve, Serve placement, Sinner, Alcaraz, Fritz, Jodar, Shelton, -Return position, -Break points
+Data: Top 10 plus Fritz, 1st serves, last 52 weeks to 5 November 2026, all surfaces
+Alt: Average landing distance from the line for 1st serves into the ad box, top 10 plus Fritz. Out wide, Sinner is closest at 51.2cm and Jodar furthest at 81.3cm; down the T, Fritz is closest at 40.1cm, then Sinner at 46.1cm, with Jodar furthest at 64.9cm.
+Alt 2: The same chart for the deuce box. Down the T, Medvedev is closest at 42.9cm, then Fritz 46.8cm and Sinner 49.3cm; out wide, Sinner is closest at 48.4cm and Shelton furthest at 71.5cm.
+Alt 3: Table of 1st serve speed, percentage in and percentage unreturned at each of the four spots for the top 10 plus Fritz. Shelton's ad T serve averages 137 mph with 62.4% unreturned; Alcaraz's ad wide serve has the lowest unreturned rate at 27.7%, while his deuce wide serve is his best at 43.9%.
+Alt 4: Curved serve paths showing average deviation on wide 1st serves to the deuce box. Fritz bends it most at 4.2 degrees, then Alcaraz 4.0 and Tiafoe 3.7; Sinner (2.4) and Zverev (2.1) bend it least.
+X: https://x.com/mattracquet/status/2118401167818461190
