@@ -1,0 +1,22 @@
+Where a 1st serve does the most damage
+
+The thing missing from [this](/posts/how-close-to-the-line) was 1st serve depth, which matters on wide serves and T serves for different reasons. Looking at 7 years of Australian Open serve data you see two intuitive things. 1. the impact of different serve speeds and accuracy to the side/T lines on unreturned serves. And 2. out wide, the shorter in the box the better, down the T, the deeper the better. This depth isn't accounted for by the '1st serve accuracy' stat that's gotten attention this year
+
+1-damage-map.jpg
+
+Players can get to similar serve outcomes in different ways. Better speed, accuracy and depth all make a serve harder to return, but in different amounts especially as you get closer to the lines. Out wide, depth probably matters more than most people think: landing shorter in the box does more for unreturned rates than hitting faster within normal ranges, at the same distance from the sideline
+
+2-two-routes.jpg
+
+Over the last 52 weeks Fritz lands his deuce-side wide serve the shortest in the box of the top 10, and hits it slower to get there (112mph to this wide spot vs his 123mph 1st-serve average). Sinner hits his wide spot 6mph faster than Fritz (118mph), deeper, and slightly closer to the line, though both are v accurate
+
+Both of these serves are incredibly effective, and both go unreturned about 50% of the time, but Fritz’s is safer: 77% land in vs Sinner’s 68%
+
+Their avg spot markers may look close together (2nd image), but Fritz’s shorter landing and extra deviation contribute to both serves being similarly damaging despite the slower, and in this case safer, serve
+
+Summary: 1st serve depth matters on wide serves and T serves for different reasons: out wide, the shorter in the box the better; down the T, the deeper the better.
+Tags: First serve, Serve placement, Serve speed, Australian Open, Fritz, Sinner
+Data: Australian Open men's main draw 2020–2026 (map); ATP last 52 weeks to 5 November 2026 (Sinner and Fritz)
+Alt: Heat maps of the chance a 1st serve that lands in goes unreturned, by landing spot in the ad and deuce boxes, at 115, 125 and 130 mph, from Australian Open men's main draw serves 2020–26 (right-handed servers, 105,316 serves). Serves within a few dozen centimetres of the sideline or T line go unreturned 60–90% of the time, against 15–25% for serves landing mid-box; out wide, the dark zone widens the shorter the serve lands in the box.
+Alt 2: Sinner and Fritz's wide 1st serves in the deuce box over the last 52 weeks. Sinner hits it at 118 mph, 48.4cm from the sideline and 1.24m inside the service line, with 2.4 degrees of deviation; Fritz hits it at 112 mph, 54.5cm from the sideline and 1.39m inside the line, with 4.2 degrees of deviation. Fritz lands 77% in to Sinner's 68%, and both go unreturned about half the time (51% and 50%).
+X: https://x.com/mattracquet/status/2120932421684302044
