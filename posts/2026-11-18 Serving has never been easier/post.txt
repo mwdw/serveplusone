@@ -7,7 +7,7 @@ Serving has never been easier
 - ...yet 1st serve in % for the top 50 is also at an all time high in 2026 (64%)
 - double faults are close to record lows at 3%
 
-Serve risk is down while effectiveness is going up
+This year, 42 of the current top 50 have held 80%+ of service games on hard courts (82%), a record since 1991. In 2006 it was fewer than half.
 
 1-never-easier.jpg
 
@@ -15,7 +15,7 @@ Serve risk is down while effectiveness is going up
 
 2-creeping-up.jpg
 
-Summary: 2026 may go down as something of a high water mark (for now) for serve dominance in men's tennis: serve risk is down while effectiveness is going up.
+Summary: 2026 may go down as something of a high water mark (for now) for serve dominance in men's tennis.
 Tags: Serve dominance, Serve speed, First serve, History
 Data: Year-end top 50, ATP tour-level hard courts, 1991–2026 (2026 to 17 November); tour averages 2022–2026
 Alt: Six line charts of year-end top 50 men on ATP hard courts, 1991 to 2026. Service games held rise from about 79.5% in the early 1990s to a record 85.1% in 2026; aces per serve point from 5.8% to 10.6%; average height from 183.5cm to 189cm; 1st serves in from a low of 56.5% around 2000 to a record 64.1%; 1st serve points won from 70.8% to 75.2%; and break points faced per service game fall from 0.55 to a record low 0.43.
