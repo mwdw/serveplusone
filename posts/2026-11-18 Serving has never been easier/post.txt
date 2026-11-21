@@ -15,9 +15,12 @@ This year, 42 of the current top 50 have held 80%+ of service games on hard cour
 
 2-creeping-up.jpg
 
+3-tiebreak-creep.png
+
 Summary: 2026 may go down as something of a high water mark (for now) for serve dominance in men's tennis.
-Tags: Serve dominance, Serve speed, First serve, History
+Tags: Serve dominance, Serve speed, First serve, History, Tiebreaks, Surface comparison
 Data: Year-end top 50, ATP tour-level hard courts, 1991–2026 (2026 to 17 November); tour averages 2022–2026
 Alt: Six line charts of year-end top 50 men on ATP hard courts, 1991 to 2026. Service games held rise from about 79.5% in the early 1990s to a record 85.1% in 2026; aces per serve point from 5.8% to 10.6%; average height from 183.5cm to 189cm; 1st serves in from a low of 56.5% around 2000 to a record 64.1%; 1st serve points won from 70.8% to 75.2%; and break points faced per service game fall from 0.55 to a record low 0.43.
 Alt 2: Three line charts of ATP Tour averages on hard courts, 2022 to 2026. 1st serves unreturned rise from 37.2% to 40.0% (41.8% for the top 20 in 2026); average 1st serve speed from 118.0 to 119.5 mph after peaking at 119.8 in 2025 (top 20: 121.3); average 2nd serve speed from 95.8 to 97.0 mph after 97.3 in 2025 (top 20: 98.7).
+Alt 3: Line chart of the share of completed sets decided by a tiebreak in ATP tour main draws, 1991 to 2026, by surface, with three-season rolling averages. All surfaces trend upward, with a step up around 2014. In 2026, hard indoor is highest at 24.4%, then grass 23.5%, hard outdoor 19.2% and clay 16.3%, up from roughly 18%, 18%, 15% and 12% in 1991. Carpet, phased out by 2009, sat around 18 to 21%.
 X: https://x.com/mattracquet/status/2123105648732729679
