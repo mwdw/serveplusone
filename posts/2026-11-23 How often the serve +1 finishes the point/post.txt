@@ -1,0 +1,18 @@
+How often the serve +1 finishes the point
+
+Zverev & Medvedev have much weaker serve+1 (the shot after their serve) potency than Alcaraz and Sinner. This is partially downstream of forehand technique, and part of why shorter blocked returns can be effective in some matchups vs Zverev/Medvedev
+
+1-plus-one-finish.jpg
+
+This isn't so much of a problem for Zverev and Medvedev (the 'big serving counterpunchers') against most of the tour because they're both so good from the baseline. But against Alcaraz who is better everywhere outside the serve, these less potent serve+1's cost them dearly
+
+2-zverev-returned.jpg
+
+3-zverev-plus-one.jpg
+
+Tags: Serve +1, First serve, Zverev, Medvedev, Alcaraz, Sinner, -Return
+Data: Hard courts, Australian Open, ATP Masters and ATP Finals (Infosys tracking), 2023–26
+Alt: Four court diagrams showing how often each player's landed first-serve +1 finishes the point, by where the return bounced, on hard courts 2024–26. Against short returns, Sinner finishes 51% and Alcaraz 50%, against a tour average of 43%; Zverev is level with the tour at 43% and Medvedev below it at 37%. Against deep returns, Sinner and Alcaraz finish 22% and Medvedev 14%, against a tour average of 21%.
+Alt 2: Share of first-serve points Zverev wins once the return lands in, on hard courts 2023–26. Against everyone except Alcaraz he wins 66% after short returns, 59% after medium and 52% after deep ones, all a few points above the tour. Against Alcaraz (321 returned first serves, 7 matches) those fall to 52%, 48% and 47%.
+Alt 3: How often Zverev's landed first-serve +1 finishes the point, on hard courts 2023–26. Against everyone except Alcaraz: 43% after short returns, 29% after medium and 19% after deep ones. Against Alcaraz (277 landed +1s, 7 matches): 35%, 20% and 13%.
+X: https://x.com/mattracquet/status/2124917606021042286
